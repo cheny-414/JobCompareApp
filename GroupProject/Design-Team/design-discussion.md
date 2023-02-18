@@ -28,10 +28,11 @@ Author: abayer3
 
 ## Design 3
 ![design 3](./design3.png)</br>
-Author: ychen3674
+Author: ychen3647
 
 ### Pros
 * Simple design
+* Clear entry point at user class
 
 ### Cons
 * Doesn't cover all requirements given
