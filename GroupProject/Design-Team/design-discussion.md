@@ -31,7 +31,7 @@ Author: ychen3647
 
 ### Pros
 * Simple design
-* Clear Entry Point
+* Clear entry point at user class
 
 ### Cons
 * Doesn't cover all requirements given
