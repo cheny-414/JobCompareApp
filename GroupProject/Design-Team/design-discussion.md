@@ -9,7 +9,6 @@ Author: fgao36
 * Design is per UML standard
 
 ### Cons
-* No class shown captures the comparison settings
 * UI classes are included in the class diagram
 * Class defined in UserMainMenu called "RankingWeight" which is not defined
 
