@@ -1,7 +1,7 @@
 # Design Discussion Document
 
 ## Design 1
-![design 1](./design1.png)</br>
+![design 1](./images/design1.png)</br>
 Author: fgao36
 
 ### Pros
@@ -13,7 +13,7 @@ Author: fgao36
 * Class defined in UserMainMenu called "RankingWeight" which is not defined
 
 ## Design 2
-![design 2](./design2.png)</br>
+![design 2](./images/design2.png)</br>
 Author: abayer3
 
 ### Pros
@@ -26,12 +26,12 @@ Author: abayer3
 * Class diagram is lacking association cardinality
 
 ## Design 3
-![design 3](./design3.png)</br>
+![design 3](./images/design3.png)</br>
 Author: ychen3647
 
 ### Pros
 * Simple design
-* Clear Entry Point
+* Clear entry point at user class
 
 ### Cons
 * Doesn't cover all requirements given
@@ -39,7 +39,7 @@ Author: ychen3647
 * No relevant methods in diagram
 
 ## Design 4
-![design 4](./design4.png)</br>
+![design 4](./images/design4.png)</br>
 Author: preddy61
 
 ### Pros
@@ -51,18 +51,21 @@ Author: preddy61
 * Design may be too complex for the simple application needed
 
 ## Team Design
-![team design](./design-team.png)</br>
+![team design](./images/design-team.png)</br>
 Author: Team 057
 
 The team design is based primarily on the design of Puneeth (preddy61, design 4)
-which was the most complete class diagram of the individual designs. The only 
-change made between design 4 and the team design was condensing the three entity 
-classes into a single class called JobEntity. This is in line with the other three
-designs which each used a single class to represent jobs. The team design also 
-uses a separate class to hold the settings or weights for job comparisons which is
-common the same structure used in three of the four individual designs. The team 
-design also adds an association between ApplicationController and JobComparator
-which was not represented well in any of the individual designs.
+which was one of the most complete class diagram of the individual designs. A few
+changes were made from design 4 and the team design, including was condensing the
+three entity classes into a single class called JobEntity, and removing the 
+JobCompareResult class. The single job entity class is in line with the other three
+designs which each used a single class to represent jobs. Removing the JobCompareResult
+removed a level of encapsulation that wasn't needed once the job entity classes were
+collapsed into a single class. The team design also uses a separate class to hold the
+settings or weights for job comparisons which is common the same structure used in
+three of the four individual designs. The team design also adds an association between
+ApplicationController and JobComparator which was not represented well in any of
+the individual designs.
 
 ## Summary
 Comparing individual designs gave an opportunity for differing design perspectives 
