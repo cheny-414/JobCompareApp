@@ -7,6 +7,7 @@
 ## 1 Design Considerations
 
 *The subsections below describe the issues that need to be addressed or resolved prior to or while completing the design, as well as issues that may influence the design process.*
+* Puneeth doing this
 
 ### 1.1 Assumptions
 
@@ -27,10 +28,14 @@
 ### 2.1 Component Diagram
 
 *This section should provide and describe a diagram that shows the various components and how they are connected. This diagram shows the logical/functional components of the system, where each component represents a cluster of related functionality. In the case of simple systems, where there is a single component, this diagram may be unnecessary; in these cases, simply state so and concisely state why.*
+* feng doing this
+* draw.io
 
 ### 2.2 Deployment Diagram
 
 *This section should describe how the different components will be deployed on actual hardware devices. Similar to the previous subsection, this diagram may be unnecessary for simple systems; in these cases, simply state so and concisely state why.*
+* alex doing this
+* draw.io
 
 ## 3 Low-Level Design
 
@@ -39,6 +44,7 @@
 ### 3.1 Class Diagram
 
 *In the case of an OO design, the internal structure of a software component would typically be expressed as a UML class diagram that represents the static class structure for the component and their relationships.*
+* this is the existing teem design
 
 ### 3.2 Other Diagrams
 
@@ -46,4 +52,5 @@
 
 ## 4 User Interface Design
 *For GUI-based systems, this section should provide the specific format/layout of the user interface of the system (e.g., in the form of graphical mockups).*
+* Puneeth working on this and will decide the tool to used to design
 

@@ -22,9 +22,12 @@
 
 *Describe how bugs and enhancement requests will be tracked.*
 
+Github will be used for bug and enchancement ....
+
 ### 1.5 Technology
 
 *Describe any testing technology you intend to use or build (e.g., JUnit, Selenium).*
+* Espresso
 
 ## 2 Test Cases
 
