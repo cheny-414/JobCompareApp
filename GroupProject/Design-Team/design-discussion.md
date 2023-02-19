@@ -28,10 +28,11 @@ Author: abayer3
 
 ## Design 3
 ![design 3](./design3.png)</br>
-Author: ychen3674
+Author: ychen3647
 
 ### Pros
 * Simple design
+* Clear Entry Point
 
 ### Cons
 * Doesn't cover all requirements given
@@ -69,7 +70,11 @@ Comparing individual designs gave an opportunity for differing design perspectiv
 to be considered which allowed for better end state design. We found that the intent
 of the requirements could be met in a variety of ways, and the final design was 
 a result of both the requirement from the customer and our design preferences as a
-team. In general for software development in a team it would be useful for the team 
+team. We had greatly differing designs resulting from the same requirements, varying in 
+complexity and which keywords got picked to be classes. In a team setting, we learned from
+angles that we never thought of before. We also learned that it is best to consult
+within a team to balance between over-simplification and over-engineering. 
+In general for software development in a team it would be useful for the team 
 to develop unique designs before collaborating to a final design as was done for this
 assignment. The experience of some team members was also very beneficial in refining 
 the team's ideas into a polished and complete UML class diagram, and the perspectives
