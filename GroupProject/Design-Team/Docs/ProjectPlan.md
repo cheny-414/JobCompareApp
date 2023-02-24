@@ -1,9 +1,9 @@
--# Project Plan
+# Project Plan
 
 *This is the template for your project plan. The parts in italics are concise explanations of what should go in the corresponding sections and should not appear in the final document.*
-* alex drafting this
 
-**Author**: \<person or team name\>
+
+**Author**: Alex Bayer
 
 ## 1 Introduction
 
@@ -23,7 +23,7 @@ This is a single user app created to compare job options to each other or to the
 #### 1. Inception
 - **Description:** The ideation phase of the solution development, starting with a general intent and proceeding through the gathering and analysis of requirements from the user or users of the product. This includes working with the user to create a set of detailed, explicit use cases and requirements that will guide the development and testing of the solution, and be used to define successful completion of the product.
 - **Entrance Criteria:**
-  1. Request for a product from a customer
+  1. Request for a product from the user
   2. Statement of product intent or goals from the user
   3. A draft of user stories (user requirements) from the user
 - **Exit Criteria:**
@@ -50,7 +50,8 @@ This is a single user app created to compare job options to each other or to the
   8. User interface design and draft user manual
   9. Stakeholder (user) agreement that the intent can be achieved by the current design and plan
   10. Optional prototype solution
-  11. >>>resource estimates? project plan?
+  11. Resource estimate for design completion
+  12. Project plan
 
 <br>
 
