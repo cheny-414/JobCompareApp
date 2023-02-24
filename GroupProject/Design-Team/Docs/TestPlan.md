@@ -22,13 +22,17 @@
 
 *Describe how bugs and enhancement requests will be tracked.*
 
-Github will be used for bug and enchancement ....
+Github will be used for bug tracking and enchancements
 
 ### 1.5 Technology
 
 *Describe any testing technology you intend to use or build (e.g., JUnit, Selenium).*
-* Espresso
+# Junits/Mockito will be used for Unit testing
+# Espresso will used for UI and System testing
 
 ## 2 Test Cases
 
 *This section should be the core of this document. You should provide a table of test cases, one per row. For each test case, the table should provide its purpose, the steps necessary to perform the test, the expected result, the actual result (to be filled later), pass/fail information (to be filled later), and any additional information you think is relevant.*
+| Sl.No      |     Description      | Inputs     |  Expected Ouput   |  Actual Output      | Test result     |
+| :---       |    :----:            |  :----:    |  :----:    		 |  :----:    	       | ---:       	 |
+| 1       |    Sample descrition    |   Sample input    |  Sample    		 |  Sample   	       |Sample       	 |
