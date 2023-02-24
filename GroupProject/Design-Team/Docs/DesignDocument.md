@@ -2,7 +2,7 @@
 
 *This is the template for your design document. The parts in italics are concise explanations of what should go in the corresponding sections and should not appear in the final document.*
 
-**Author**: \<person or team name\>
+**Author**: \<Puneeth, Feng and Alex \>
 
 ## 1 Design Considerations
 
@@ -12,14 +12,25 @@
 ### 1.1 Assumptions
 
 *Describe any assumption, background, or dependencies of the software, its use, the operational environment, or significant project issues.*
+Current android app is developed using the features and API of Anroid 12. It must be ensured that the app should be backward compatible until Android 8.0 (API level 26). 
+The app in intended to be used by people of age above 15 in all countries on android platform only. The app should not shows any ads in the UI.
+Android app developers need to ensure that their apps have an intuitive and user-friendly UI and provide an excellent user experience. 
+This may require testing and optimizing the app's design and functionality
 
 ### 1.2 Constraints
 
 *Describe any constraints on the system that have a significant impact on the design of the system.*
+Technical Constraints: Technical constraints can impact the design of a system, such as hardware limitations or compatibility issues. 
+For example, if a system needs to run on older hardware or software, the design may need to be optimized to ensure compatibility.
+User Constraints: User constraints can impact the design of a system, such as the need to accommodate users with disabilities or language barriers. 
+For example, if a system needs to be accessible to visually impaired users, the design may need to incorporate specific accessibility features.
 
 ### 1.3 System Environment
 
 *Describe the hardware and software that the system must operate in and interact with.*
+The developed application is primarly tested on below hardware and software platforms
+# Hardware : Pixel 4 XL
+# Software : Android 12 (API level 31) 	 	
 
 ## 2 Architectural Design
 
@@ -52,5 +63,5 @@ A deployment diagram is unnecessary for this solution, as the solution is intend
 
 ## 4 User Interface Design
 *For GUI-based systems, this section should provide the specific format/layout of the user interface of the system (e.g., in the form of graphical mockups).*
-* Puneeth working on this and will decide the tool to used to design
+Balsmiq Wireframes tools is used to develop the mockup of the application UI.
 
