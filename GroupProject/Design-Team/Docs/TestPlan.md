@@ -1,22 +1,10 @@
 # Test Plan
 
-*This is the template for your test plan. The parts in italics are concise explanations of what should go in the corresponding sections and should not appear in the final document.*
-
-**Author**: \<person or team name\>
+**Author**: Puneeth, Yiliang, Feng, Alex
 
 ## 1 Testing Strategy
 
 ### 1.1 Overall strategy
-
-*This section should provide details about your unit-, integration-, system-, and regression-testing strategies. In particular, it should discuss which activities you will perform as part of your testing process, and who will perform such activities.*
--
-- Alex
-- 
-- unit test strategy
-- system test str ategy
-- integration test not needed ...
-- regression testing not needed ...
-
 Testing of the Job Comparison app will primarily be performed using a combination of white and black box testing, with additional unit level verification potentially provided by reviews and walkthroughs.
 - Unit testing will be developed by class, with tests verifying intended functionality that is internal to said class. 
 - Integration testing will focus on the compare job functionality and will assume jobs and settings are previously populated by the user. As the proposed system is relatively simple, this is the only integration test planned.
@@ -26,15 +14,6 @@ Testing of the Job Comparison app will primarily be performed using a combinatio
 There will be significant overlap of integration testing and system testing based on the overall test strategy discussed here. As tests are developed, integration testing may be absorbed into system testing, with no subsystems remaining that warrant discrete integration testing.
 
 ### 1.2 Test Selection
-
-*Here you should discuss how you are going to select your test cases, that is, which black-box and/or white-box techniques you will use. If you plan to use different techniques at different testing levels (e.g., unit and system), you should clarify that.*
-- 
-- Feng
-- 
-- test selection methods
-- unit: white and black box
-- system: black box
-
 For unit test, both black-box test and white-box test will be applied. 
 - Black-box test is used to test whether each unit functions as expected and partition testing technique will be used to check whether the outputs are correct or whether the component can generate corresponding error messages when inputs do not meet the specified criteria. 
 - White-box test is used to identify errors in the corresponding codes. Statement coverage technique will be used to examine all the statements in the code. 
@@ -45,25 +24,13 @@ For system test, black-box test will be applied to check whether the system meet
 
 
 ### 1.3 Adequacy Criterion
-
-*Define how you are going to assess the quality of your test cases. Typically, this involves some form of functional or structural coverage. If you plan to use different techniques at different testing levels (e.g., unit and system), you should clarify that.*
-- 
-- Puneeth
-- 
-- code coverage of test cases
-
-All the model and controller classes will be test using Junits and the system/functional tests will be performed using UI testcases. The est cases should cover all of the requirements or functionalities of the system being tested including both positive and negative scenarios. Android code coverage report will be used to assess the quality of your 
+All the model and controller classes will be tested using JUnit and the system/functional tests will be performed using UI testcases. The test cases should cover all requirements or functionalities of the system being tested including both positive and negative scenarios. Android code coverage report will be used to assess the quality of the test cases. 
 
 ### 1.4 Bug Tracking
-
-*Describe how bugs and enhancement requests will be tracked.*
-
 GitHub projects will be used for bug tracking and managing enhancement requests. As this is a single user app, communication from the user will be direct to the development team with the Project Manager coordinating communication. Two projects have been created on the 6300Spring23Team057 repository for this purpose.
 
 ### 1.5 Technology
-
-*Describe any testing technology you intend to use or build (e.g., JUnit, Selenium).*
-- Junits/Mockito will be used for Unit testing
+- JUnit/Mockito will be used for Unit testing
 - Espresso will used for UI and System testing
 
 ## 2 Test Cases
