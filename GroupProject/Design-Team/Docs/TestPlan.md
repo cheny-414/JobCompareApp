@@ -35,9 +35,13 @@ There will be significant overlap of integration testing and system testing base
 - unit: white and black box
 - system: black box
 
-For unit test, both black-box test and white-box test will be applied. Black-box test is used to test whether each unit functions as expected. White-box test is used to identify errors in the corresponding codes. 
+For unit test, both black-box test and white-box test will be applied. 
+- Black-box test is used to test whether each unit functions as expected and partition testing technique will be used to check whether the outputs are correct or whether the component can generate corresponding error messages when inputs do not meet the specified criteria. 
+- White-box test is used to identify errors in the corresponding codes. Statement coverage technique will be used to examine all the statements in the code. 
 
-For system test, black-box test will be applied to check whether the system meets the specified requirement and works correctly as expected. 
+For system test, black-box test will be applied to check whether the system meets the specified requirements. 
+- Partition testing technique will be used to test whether the system generates correct results.
+- State transition testing technique will be used to examine whether the system transit among pages as specified. 
 
 
 ### 1.3 Adequacy Criterion
