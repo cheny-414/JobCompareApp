@@ -13,9 +13,18 @@
 - Alex
 - 
 - unit test strategy
-- system test strategy
+- system test str ategy
 - integration test not needed ...
 - regression testing not needed ...
+
+Testing of the Job Comparison app will primarily be performed using a combination of white and black box testing, with additional unit level verification potentially provided by reviews and walkthroughs.
+- Unit testing will be developed by class, with tests verifying intended functionality that is internal to said class. 
+- Integration testing will focus on the compare job functionality and will assume jobs and settings are previously populated by the user. As the proposed system is relatively simple, this is the only integration test planned.
+- System testing will cover the full system, emulating the user from first opening the app through successful job comparison. It will also include adjusting of the ComparisonSettings parameters prior to executing the comparison.
+- Regression testing will use the full test suite defined for solution development which can be re-run and updated as additional features are requested and failures are resolved.
+
+There will be significant overlap of integration testing and system testing based on the overall test strategy discussed here. As tests are developed, integration testing may be absorbed into system testing, with no subsystems remaining that warrant discrete integration testing.
+
 ### 1.2 Test Selection
 
 *Here you should discuss how you are going to select your test cases, that is, which black-box and/or white-box techniques you will use. If you plan to use different techniques at different testing levels (e.g., unit and system), you should clarify that.*
@@ -36,10 +45,7 @@
 
 *Describe how bugs and enhancement requests will be tracked.*
 
-- 
-- Alex
-- 
-- Github will be used for bug tracking and enchancements
+GitHub projects will be used for bug tracking and managing enhancement requests. As this is a single user app, communication from the user will be direct to the development team with the Project Manager coordinating communication. Two projects have been created on the 6300Spring23Team057 repository for this purpose.
 
 ### 1.5 Technology
 
