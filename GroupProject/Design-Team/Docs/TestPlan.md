@@ -51,6 +51,9 @@ For system test, black-box test will be applied to check whether the system meet
 - Puneeth
 - 
 - code coverage of test cases
+
+All the model and controller classes will be test using Junits and the system/functional tests will be performed using UI testcases. The est cases should cover all of the requirements or functionalities of the system being tested including both positive and negative scenarios. Android code coverage report will be used to assess the quality of your 
+
 ### 1.4 Bug Tracking
 
 *Describe how bugs and enhancement requests will be tracked.*
