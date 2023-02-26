@@ -27,9 +27,10 @@ This may require testing and optimizing the app's design and functionality. The 
 ## 2 Architectural Design
 ### 2.1 Component Diagram
 >>
-*This section should provide and describe a diagram that shows the various components and how they are connected. This diagram shows the logical/functional components of the system, where each component represents a cluster of related functionality. In the case of simple systems, where there is a single component, this diagram may be unnecessary; in these cases, simply state so and concisely state why.*
-* feng doing this
-* draw.io
+There are five components in the system. The user interacts with the system through user application controller, which allows the user to make various actions and provides the results back to the user. On the backend, the JobEntity component provides details about the job saved for comparison. JobCompare will return the results of comparison to frontend. All job information saved by the user will be stored in the application database. \
+![Component Diagram](./ComponentDiagram.png)
+
+
 
 ### 2.2 Deployment Diagram
 A deployment diagram is unnecessary for this solution, as the solution is intended for use by a single user on a single system with no communication between systems. This is stated in the requirements document as requirement 8: "you may assume there is a single system running the app (no communication or saving between devices is necessary)". This solution will run entirely on a single Android device.
@@ -44,3 +45,4 @@ A deployment diagram is unnecessary for this solution, as the solution is intend
 Balsmiq Wireframes tools is used to develop the mockup of the application UI.\
 [User Interface Mockup](./wireframe.pdf)
 
+ 
