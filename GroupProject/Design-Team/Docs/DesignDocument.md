@@ -37,7 +37,7 @@ A deployment diagram is unnecessary for this solution, as the solution is intend
 
 ## 3 Low-Level Design
 ### 3.1 Class Diagram
-![Team Class Diagram](../images/design-team.png)\
+![Team Class Diagram](../images/design-team.png)
 
 [Design Description](../design-description.md)
 
