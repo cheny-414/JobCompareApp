@@ -1,25 +1,11 @@
 # Project Plan
 
-*This is the template for your project plan. The parts in italics are concise explanations of what should go in the corresponding sections and should not appear in the final document.*
-
-
 **Author**: Alex Bayer
 
 ## 1 Introduction
-
-*Here you introduce the product. Keep this  clean and simple, one or two sentences at most.*\
-
 This is a single user app created to compare job options to each other or to the user's current job using a variety of information about each option.
 
 ## 2 Process Description
-
-*Project development process description as a set of activities; for each development process activity, provide the following:*
-
-- *Activity name (verb or verb phrase)*
-- *Activity description (concise paragraph)*
-- *Entrance criteria (inputs needed for the activity)*
-- *Exit criteria (outputs produced by the activity and how you know it has been completed satisfactorily)*
-
 #### 1. Inception
 - **Description:** The ideation phase of the solution development, starting with a general intent and proceeding through the gathering and analysis of requirements from the user or users of the product. This includes working with the user to create a set of detailed, explicit use cases and requirements that will guide the development and testing of the solution, and be used to define successful completion of the product.
 - **Entrance Criteria:**
@@ -88,13 +74,6 @@ This is a single user app created to compare job options to each other or to the
   1. Concurrence from stakeholders to end ongoing solution support and maintenance
 
 ## 3 Team
-
-*Describe the team and their roles (include at least 4 roles, there may be more roles than there are team members)*
-
-- *Team members' names*
-- *Roles, with a short description of each role*
-- *Table showing which team member(s) has which role(s)*
-
 #### Team Members
 - Puneeth Kumar Chana Reddy
 - Yiliang Chen
