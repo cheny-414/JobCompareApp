@@ -38,9 +38,24 @@ GitHub projects will be used for bug tracking and managing enhancement requests.
 *This section should be the core of this document. You should provide a table of test cases, one per row. For each test case, the table should provide its purpose, the steps necessary to perform the test, the expected result, the actual result (to be filled later), pass/fail information (to be filled later), and any additional information you think is relevant.*
 
 ### Unit Test Cases (JUnit)
+<<<<<<< Updated upstream
 | Test Case # | Purpose | Scope  | Inputs | Steps | Expected Result  | Actual result | Pass / Fail |
 |-------------|---------|--------|--------|-------|------------------|---------------|-------------|
 | 1           | sdokm   | asd    | asd    | asd   | asd              |               |             |\
+=======
+
+>>>create factory for JobEntity?
+>>>compute job scores in application controller? / job scores not stored for use in sortJobsByScore
+
+| Test Case # | Purpose                 | Scope                                                          | Inputs                                                                                               | Steps                                           | Expected Result                                                                      | Actual result | Pass / Fail |
+|-------------|-------------------------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------|---------------|-------------|
+| 1           | test getJobs()          | ApplicationController (JobEntity Factory?)                     | 0-n JobEntity instances                                                                              | 1. call getJobs()                               | 0-n JobEntity instances                                                              |               |             |
+| 2           | test getCurrentJob()    | ApplicationController (JobEntity Factory?)                     | 0-n JobEntity instances, one with isCurrentJob = True                                                | 1. call getCurrentJob()                         | JobEntity with isCurrentJob = True                                                   |               |             |
+| 3           | test addJob(...)        | ApplicationController (JobEntity Factory?)                     | list of arguments matching JobEntity parameters                                                      | 1. call addJob(inputs)<br/>2. call getJobs()    | - JobEntity(inputs) in getJobs() return<br/>- <=1 JobEntity with isCurrentJob = True |               |             |
+| 4           | test removeJob(...)     | ApplicationController (JobEntity Factory?)                     | 1. 0-n JobEntity instances<br/>2. JobEntity ID \[0-n JobEntity]                                      | 1. call removeJob(input2)<br/>2. call getJobs() | JobEntity(input) is not in getJobs() return                                          |               |             |
+| 5           | test computeJobScores() | ApplicationController (JobEntity Factory?), JobCompareSettings | 1. 0-n JobEntity instances with linked scores<br/>2. JobCompareSettings                              | 1. call computeJobScores()                      | computeJobScores() return = input1                                                   |               |             |
+| 6           | test sortJobsByScore()  | ApplicationController (JobEntity Factory?)                     | 1. 0-n JobEntity instances with linked scores<br/>2. 0-n JobEntity instances sorted by linked scores | 1. call sortJobsByScore()                       | sortJobsByScore() return = input2                                                    |               |             |
+>>>>>>> Stashed changes
 
 
 ### System Test Cases (UI)
