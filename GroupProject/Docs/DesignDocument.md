@@ -1,6 +1,6 @@
 # Design Document
 
-**Author**: Puneeth, Feng and Alex
+**Author**: Puneeth, Feng, and Alex
 
 ## 1 Design Considerations
 
@@ -26,7 +26,6 @@ This may require testing and optimizing the app's design and functionality. The 
 
 ## 2 Architectural Design
 ### 2.1 Component Diagram
->>
 There are five components in the system. The user interacts with the system through user application controller, which allows the user to make various actions and provides the results back to the user. On the backend, the JobEntity component provides details about the job saved for comparison. JobCompare will return the results of comparison to frontend. All job information saved by the user will be stored in the application database. \
 ![Component Diagram](./ComponentDiagram.png)
 
@@ -37,9 +36,9 @@ A deployment diagram is unnecessary for this solution, as the solution is intend
 
 ## 3 Low-Level Design
 ### 3.1 Class Diagram
-![Team Class Diagram](../images/design-team.png)
+![Team Class Diagram](../Design-Team/images/design-team.png)
 
-[Design Description](../design-description.md)
+[Design Description](../Design-Team/design-description.md)
 
 ## 4 User Interface Design
 Balsmiq Wireframes tools is used to develop the mockup of the application UI.\
