@@ -73,17 +73,14 @@ GitHub projects will be used for bug tracking and managing enhancement requests.
 ### Unit Test Cases (JUnit)
 | Test Case # | Purpose | Scope  | Inputs | Steps | Expected Result  | Actual result | Pass / Fail |
 |-------------|---------|--------|--------|-------|------------------|---------------|-------------|
-| 1           | present ranked list for all jobs saved when user click on compare job offers in main menu   | Compare Jobs   | ![List of all jobs saved](./TestCaseJobCompare1Input.png)   | 1.click on job offer compare button from main menu    | display ranked list of tile and company for all saved jobs by descending scores and current job should be clearly indicated ![Ranked List](./TestCaseJobCompare1Output.png)             |               |             |\
-| 2           | compare two job offers from the ranked list  | Compare Jobs   | ![List of the two selected jobs](./TestCaseJobCompare2Input.png)   | 1.select two jobs from the list 2.click on compare button    | ![Comparison between two jobs](./TestCaseJobCompare2Output.png)               |               |             |\
-| 5           | compare the entered job offer with current job saved | Compare Jobs   | ![List of current job and job offer just saved](./TestCaseJobCompare2Input.png)    | 1.click on compare button from job offer page (current job needs to be added and saved)    | ![Comparison between current job and the job offer](./TestCaseJobCompare2Output.png)              |               |             |
+| 1           | sdokm   | asd    | asd    | asd   | asd              |               |             |\
+
 
 ### System Test Cases (UI)
 | Test Case # | Purpose | Scope  | Inputs | Steps | Expected Result  | Actual result | Pass / Fail |
 |-------------|---------|--------|--------|-------|------------------|---------------|-------------|
 | 1           | sdokm   | asd    | asd    | asd   | asd              |               |             |\
-| 3           | return to main menu from result page of compare job  | Compare Jobs   | N/A    | 1.click on return to main menu button on the result page    | return to main menu             |               |             |\
-| 4           | perform another job offer comparison from result page of compare job  | Compare Jobs   | N/A    | click on return to perform another job offer comparison button on the result page   | return to the page of ranked list of all jobs         |               |             |\
-| 6           | compare the entered job offer without current job saved  | Compare Jobs   | N/A    | click on compare button from job offer page (no current job saved)    | error message             |               |             |
+
 
 - job offer - Puneeth
 - compare job - Feng
