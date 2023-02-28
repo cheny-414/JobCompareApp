@@ -37,7 +37,8 @@ public class JobOffersActivity extends AppCompatActivity {
 		Objects.requireNonNull(getSupportActionBar()).setTitle(actionBarTitle);
 		RecyclerView rvJobOffers = findViewById(R.id.rvJobOffers);
 		// we are initializing our adapter class and passing our job list to it.
-		JobOffersAdapter jobOffersAdapter = new JobOffersAdapter(this, instance.sortJobsByScore(), new JobOffersAdapter.OnItemCheckListener() {
+		List<JobEntity> jobs = instance.sortJobsByScore();
+		JobOffersAdapter jobOffersAdapter = new JobOffersAdapter(this, jobs, new JobOffersAdapter.OnItemCheckListener() {
 			@Override public void onItemCheck(JobEntity item) {
 				selectedJobs.add(item);
 				toggleCompareMenuItem(selectedJobs.size() == 2);

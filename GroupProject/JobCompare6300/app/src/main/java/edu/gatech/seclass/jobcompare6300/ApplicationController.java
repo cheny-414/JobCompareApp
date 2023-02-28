@@ -70,9 +70,9 @@ public class ApplicationController {
 
 
 	private void setAdditionalAttributes(JobEntity jobEntity) {
-		float change = (jobEntity.getCostIndex() - 100.0f) / 100.0f;
-		jobEntity.setYearlyAdjustedSalary(jobEntity.getYearlySalary() * (1 - change));
-		jobEntity.setYearlyAdjustedBonus(jobEntity.getYearlyBonus() * (1 - change));
+		float change = 100.0f / jobEntity.getCostIndex();
+		jobEntity.setYearlyAdjustedSalary(jobEntity.getYearlySalary() * change);
+		jobEntity.setYearlyAdjustedBonus(jobEntity.getYearlyBonus() * change);
 		float jobScore = JobComparator.calculateJobScore(jobEntity, jobCompareSettings);
 		jobEntity.setJobScore(jobScore);
 	}
@@ -182,7 +182,9 @@ public class ApplicationController {
 		List<JobEntity> allJobs = new ArrayList<>(this.getJobs());
 		allJobs.remove(currentJob);
 		allJobs.sort(Comparator.comparingDouble(JobEntity::getJobScore).reversed());
-		allJobs.add(0, currentJob);
+		if (null != currentJob) {
+			allJobs.add(0, currentJob);
+		}
 		return allJobs;
 	}
 
