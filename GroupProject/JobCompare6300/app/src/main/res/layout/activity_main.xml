@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+    <Button
+            android:id="@+id/btnCurrentJob"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="onEnterCurrentJobClicked"
+            android:text="@string/enter_current_job" />
+
+    <Button
+            android:id="@+id/btnJobOffer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="onEnterJobOfferClicked"
+            android:text="@string/enter_job_offer" />
+
+    <Button
+            android:id="@+id/btnCompareJobOffers"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="onCompareJobOffersClicked"
+            android:text="@string/compare_job_offers" />
+
+    <Button
+            android:id="@+id/button3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="onAdjustCompareSettingsClicked"
+            android:text="@string/adjust_comparison_settings" />
+
+</LinearLayout>

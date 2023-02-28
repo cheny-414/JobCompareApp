@@ -1,0 +1,213 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/title" />
+
+            <EditText
+                    android:id="@+id/etTitle"
+                    android:layout_width="0dp"
+                    android:hint="@string/hint_title_of_the_job"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tvCompany"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/company" />
+
+            <EditText
+                    android:id="@+id/etCompany"
+                    android:layout_width="0dp"
+                    android:hint="@string/hint_name_of_the_company"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/location" />
+
+            <EditText
+                    android:id="@+id/etLocation"
+                    android:layout_width="0dp"
+                    android:hint="@string/hint_location_of_the_company"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tvCostIndex"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/cost_of_living_index" />
+
+            <EditText
+                    android:id="@+id/etCostIndex"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_value_of_cost_of_living_index"
+                    android:digits="0123456789"
+                    android:inputType="number"
+                    android:layout_weight="0.6" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tvYearlySalary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/yearly_salary" />
+
+            <EditText
+                    android:id="@+id/etYearlySalary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_yearly_salary"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal"
+                    android:layout_weight="0.6" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tvYearlyBonus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/yearly_bonus" />
+
+            <EditText
+                    android:id="@+id/etYearlyBonus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_yearly_bonus"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal"
+                    android:layout_weight="0.6" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tvRsua"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/restricted_stock_unit_award" />
+
+            <EditText
+                    android:id="@+id/etRsua"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_rsua"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal"
+                    android:layout_weight="0.6" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tvRelocStipend"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/relocation_stipend" />
+
+            <EditText
+                    android:id="@+id/etRelocStipend"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_reloc_stipend"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal"
+                    android:layout_weight="0.6" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tvPcHolidays"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/personal_choice_holidays" />
+
+            <EditText
+                    android:id="@+id/etPcHolidays"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789"
+                    android:hint="@string/hint_pc_holidays"
+                    android:inputType="number"
+                    android:layout_weight="0.6" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
