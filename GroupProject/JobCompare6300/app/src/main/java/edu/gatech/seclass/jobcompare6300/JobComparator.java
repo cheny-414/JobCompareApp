@@ -43,10 +43,8 @@ public class JobComparator {
 		comparisonResult.put(TITLE, 0);
 		comparisonResult.put(COMPANY, 0);
 		comparisonResult.put(LOCATION, 0);
-		comparisonResult.put(YEARLY_ADJUSTED_SALARY, Float.compare((job1.getYearlySalary() - job1.getYearlyAdjustedSalary())
-				, (job2.getYearlySalary() - job2.getYearlyAdjustedSalary())));
-		comparisonResult.put(YEARLY_ADJUSTED_BONUS, Float.compare((job1.getYearlyBonus() - job1.getYearlyAdjustedBonus()),
-				(job2.getYearlyBonus() - job2.getYearlyAdjustedBonus())));
+		comparisonResult.put(YEARLY_ADJUSTED_SALARY, Float.compare(job1.getYearlyAdjustedSalary(), job2.getYearlyAdjustedSalary()));
+		comparisonResult.put(YEARLY_ADJUSTED_BONUS, Float.compare(job1.getYearlyAdjustedBonus(), job2.getYearlyAdjustedBonus()));
 		comparisonResult.put(RSUA, Float.compare(job1.getRsua(), job2.getRsua()));
 		comparisonResult.put(RELOC_STIPEND, Float.compare(job1.getRelocStipend(), job2.getRelocStipend()));
 		comparisonResult.put(PC_HOLIDAYS, Integer.compare(job1.getPcHolidays(), job2.getPcHolidays()));

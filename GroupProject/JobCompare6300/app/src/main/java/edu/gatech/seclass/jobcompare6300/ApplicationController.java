@@ -60,11 +60,21 @@ public class ApplicationController {
 				throw new IllegalArgumentException("Cannot have two current jobs");
 			}
 		}
+		setAdditionalAttributes(jobEntity);
 		int createJob = createJobInDb(jobEntity);
 		if (createJob == 1) {
 			this.jobs.add(jobEntity);
 			logger.info("Added job " + jobEntity.toString());
 		}
+	}
+
+
+	private void setAdditionalAttributes(JobEntity jobEntity) {
+		float change = 100.0f / jobEntity.getCostIndex();
+		jobEntity.setYearlyAdjustedSalary(jobEntity.getYearlySalary() * change);
+		jobEntity.setYearlyAdjustedBonus(jobEntity.getYearlyBonus() * change);
+		float jobScore = JobComparator.calculateJobScore(jobEntity, jobCompareSettings);
+		jobEntity.setJobScore(jobScore);
 	}
 
 
@@ -138,6 +148,7 @@ public class ApplicationController {
 
 
 	public int updateJob(JobEntity jobEntity) {
+		setAdditionalAttributes(jobEntity);
 		return updateJobInDb(jobEntity);
 	}
 
@@ -171,7 +182,9 @@ public class ApplicationController {
 		List<JobEntity> allJobs = new ArrayList<>(this.getJobs());
 		allJobs.remove(currentJob);
 		allJobs.sort(Comparator.comparingDouble(JobEntity::getJobScore).reversed());
-		allJobs.add(0, currentJob);
+		if (null != currentJob) {
+			allJobs.add(0, currentJob);
+		}
 		return allJobs;
 	}
 
