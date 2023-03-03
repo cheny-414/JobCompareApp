@@ -2,6 +2,11 @@ package edu.gatech.seclass.jobcompare6300;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.gatech.seclass.jobcompare6300.db.JobEntity;
+
 import static org.junit.Assert.*;
 
 /**
