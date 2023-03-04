@@ -1,44 +1,30 @@
 package edu.gatech.seclass.jobcompare6300;
 
 import android.app.Activity;
-import android.view.View;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.junit.After;
-import org.junit.Before;
+import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.test.espresso.intent.Intents;
-import androidx.test.espresso.matcher.BoundedMatcher;
+import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 import androidx.test.runner.lifecycle.Stage;
-import edu.gatech.seclass.jobcompare6300.db.JobEntity;
-import edu.gatech.seclass.jobcompare6300.ui.JobActivity;
+import edu.gatech.seclass.jobcompare6300.ui.JobCompareActivity;
 import edu.gatech.seclass.jobcompare6300.ui.JobOffersActivity;
-import edu.gatech.seclass.jobcompare6300.ui.MainActivity;
 
-import static androidx.core.util.Preconditions.checkNotNull;
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.longClick;
-import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.intent.Intents.intended;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -94,6 +80,30 @@ public class JobOffersUITest {
 				.atPositionOnView(8, R.id.tvJob2Attribute))
 				.check(matches(withText("10")));
 
+	}
+
+
+	@Ignore
+	@Test
+	public void testJobCompareError() {
+		ActivityScenario.launch(JobCompareActivity.class);
+		Activity jobCompareActivity = getCurrentActivity();
+		onView(withText("Invalid job ids for comparison"))
+				.inRoot(withDecorView(Matchers.not(jobCompareActivity.getWindow().getDecorView())))// Here we use decorView
+				.check(matches(isDisplayed()));
+	}
+
+
+	public Activity getCurrentActivity() {
+		final Activity[] currentActivity = new Activity[1];
+		InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
+			Collection<Activity> allActivities = ActivityLifecycleMonitorRegistry.getInstance()
+					.getActivitiesInStage(Stage.RESUMED);
+			if (!allActivities.isEmpty()) {
+				currentActivity[0] = allActivities.iterator().next();
+			}
+		});
+		return currentActivity[0];
 	}
 
 }
