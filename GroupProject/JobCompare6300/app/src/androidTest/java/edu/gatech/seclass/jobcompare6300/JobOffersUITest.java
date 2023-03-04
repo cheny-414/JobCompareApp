@@ -72,6 +72,28 @@ public class JobOffersUITest {
 
 		onView(withId(R.id.action_compare)).check(matches(isEnabled()));
 
+		onView(withId(R.id.action_compare)).perform(click());
+
+		onView(withRecyclerView(R.id.rvJobOffers)
+				.atPositionOnView(1, R.id.tvJobAttributeName))
+				.check(matches(withText(JobComparator.TITLE)));
+		onView(withRecyclerView(R.id.rvJobOffers)
+				.atPositionOnView(1, R.id.tvJob1Attribute))
+				.check(matches(withText("My Current Title")));
+		onView(withRecyclerView(R.id.rvJobOffers)
+				.atPositionOnView(1, R.id.tvJob2Attribute))
+				.check(matches(withText("My Title")));
+
+		onView(withRecyclerView(R.id.rvJobOffers)
+				.atPositionOnView(8, R.id.tvJobAttributeName))
+				.check(matches(withText(JobComparator.PC_HOLIDAYS)));
+		onView(withRecyclerView(R.id.rvJobOffers)
+				.atPositionOnView(8, R.id.tvJob1Attribute))
+				.check(matches(withText("10")));
+		onView(withRecyclerView(R.id.rvJobOffers)
+				.atPositionOnView(8, R.id.tvJob2Attribute))
+				.check(matches(withText("10")));
+
 	}
 
 }
