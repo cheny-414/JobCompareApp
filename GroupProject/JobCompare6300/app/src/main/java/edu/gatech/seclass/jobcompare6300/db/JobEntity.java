@@ -163,6 +163,15 @@ public class JobEntity {
 		return isCurrentJob;
 	}
 
+	public String isCurrentJobString() {
+		if(isCurrentJob == false){
+			return "N";
+		}
+		else{
+			return "Y";
+		}
+
+	} //Feng added for current job indicator in the comparison results
 
 	public void setCurrentJob(boolean currentJob) {
 		isCurrentJob = currentJob;

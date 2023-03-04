@@ -25,6 +25,7 @@ public class JobComparator {
 	public static final String RELOC_STIPEND = "Relocation stipend ";
 	public static final String PC_HOLIDAYS = "Personal Choice Holidays";
 	public static final String JOB_SCORE = "Job Score";
+	public static final String IS_CURRENT_JOB = "Is Current Job"; //Feng added for current job indicator in the comparison results
 	private final JobEntity job1;
 	private final JobEntity job2;
 	private final JobCompareSettings jobCompareSettings;
@@ -50,6 +51,7 @@ public class JobComparator {
 		comparisonResult.put(PC_HOLIDAYS, Integer.compare(job1.getPcHolidays(), job2.getPcHolidays()));
 		comparisonResult.put(JOB_SCORE, Float.compare(calculateJobScore(this.job1, this.jobCompareSettings),
 				calculateJobScore(this.job2, this.jobCompareSettings)));
+		comparisonResult.put(IS_CURRENT_JOB, 0); //Feng added for current job indicator in the comparison results
 		return comparisonResult;
 	}
 

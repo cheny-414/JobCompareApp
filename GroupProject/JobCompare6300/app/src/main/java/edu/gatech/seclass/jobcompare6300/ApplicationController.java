@@ -178,6 +178,7 @@ public class ApplicationController {
 
 
 	public List<JobEntity> sortJobsByScore() {
+		computeJobScores(); //Feng added to recalculate scores when settings are changed
 		JobEntity currentJob = getCurrentJob();
 		List<JobEntity> allJobs = new ArrayList<>(this.getJobs());
 		allJobs.remove(currentJob);

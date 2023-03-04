@@ -115,6 +115,9 @@ public class JobCompareAdapter extends RecyclerView.Adapter<JobCompareAdapter.Vi
 		else if (JobComparator.JOB_SCORE.equals(key)) {
 			return "" + job.getJobScore();
 		}
+		else if (JobComparator.IS_CURRENT_JOB.equals(key)){
+			return job.isCurrentJobString();
+		} //Feng added for current job indicator in the comparison results
 		return "";
 	}
 
