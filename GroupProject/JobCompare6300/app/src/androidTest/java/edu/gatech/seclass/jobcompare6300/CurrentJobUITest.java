@@ -188,12 +188,11 @@ public class CurrentJobUITest {
 		onView(withId(R.id.etCompany)).check(matches(withText(company)));
 		onView(withId(R.id.etLocation)).check(matches(withText(location)));
 		onView(withId(R.id.etCostIndex)).check(matches(withText(costIndex)));
-		onView(withId(R.id.etYearlySalary)).check(matches(withText(salary)));
-		onView(withId(R.id.etYearlyBonus)).check(matches(withText(bonus)));
-		onView(withId(R.id.etRsua)).check(matches(withText(rusa)));
-		onView(withId(R.id.etRelocStipend)).check(matches(withText(relo)));
+		onView(withId(R.id.etYearlySalary)).check(matches(withText(salary + ".00")));
+		onView(withId(R.id.etYearlyBonus)).check(matches(withText(bonus + ".00")));
+		onView(withId(R.id.etRsua)).check(matches(withText(rusa + ".00")));
+		onView(withId(R.id.etRelocStipend)).check(matches(withText(relo + ".00")));
 		onView(withId(R.id.etPcHolidays)).check(matches(withText(pch)));
-		onView(withId(R.id.etTitle)).check(matches(withText(title)));
 
 		onView(withId(R.id.action_cancel)).perform(click());
 

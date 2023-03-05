@@ -78,34 +78,6 @@ public class MainActivityUITest {
 		intended(hasComponent(JobCompareSettingsActivity.class.getName()));
 	}
 
-//	@Test
-	//	public void testAddJob() {
-	//		JobEntity testJob = new JobEntity();
-	//		testJob.setTitle("TestJob2");
-	//		testJob.setCompany("TestCompany");
-	//		testJob.setLocation("TestLocation");
-	//		testJob.setCostIndex(5);
-	//		testJob.setYearlySalary(111);
-	//		testJob.setYearlyBonus(222);
-	//		testJob.setRsua(333);
-	//		testJob.setRelocStipend(444);
-	//		testJob.setPcHolidays(555);
-	//		testJob.setCurrentJob(false);
-	//		ApplicationController.getInstance().addJob(testJob);
-	//		assertEquals(testJob.getTitle(), "TestJob2");
-	//	}
-	//
-	//
-	//	@Test
-	//	public void removeAllJobs() {
-	//		// Context of the app under test.
-	//		List<JobEntity> jobs = new ArrayList<>(ApplicationController.getInstance().getJobs());
-	//		for (JobEntity job : jobs) {
-	//			ApplicationController.getInstance().removeJob(job);
-	//		}
-	//	}
-
-
 	@After
 	public void tearDown() {
 		Intents.release();

@@ -24,6 +24,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
+import static edu.gatech.seclass.jobcompare6300.TestUtilities.*;
+
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -34,13 +36,6 @@ public class JobOfferUITest {
 
 	@Rule public ActivityScenarioRule<JobActivity> activityScenarioRule
 			= new ActivityScenarioRule<>(JobActivity.class);
-
-
-	private void replaceTextHelper(int viewId, String stringToBeSet) {
-		// to reduce flaky test, https://stackoverflow.com/a/53430379/1326678
-		onView(withId(viewId)).perform(clearText(), replaceText(stringToBeSet), closeSoftKeyboard());
-	}
-
 
 	@Test
 	public void testAddJobFields() {
