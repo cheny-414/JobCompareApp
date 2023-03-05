@@ -7,6 +7,7 @@ import android.view.View;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 
 import androidx.annotation.IdRes;
 import androidx.core.content.res.ResourcesCompat;
@@ -18,10 +19,19 @@ import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.espresso.util.HumanReadables;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.gatech.seclass.jobcompare6300.db.JobEntity;
+
+import org.slf4j.LoggerFactory;
+
 /**
  * Created by dannyroa on 5/9/15.
  */
 public class TestUtils {
+
+	private final org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
 
 	public static <VH extends RecyclerView.ViewHolder> ViewAction actionOnItemViewAtPosition(int position,
 			@IdRes
@@ -136,6 +146,7 @@ public class TestUtils {
 				Resources resources = item.getContext().getResources();
 				expectedColor = ResourcesCompat.getColor(resources, expectedResourceId, null);
 
+	}
 
 				actualColor = ((ColorDrawable) item.getBackground()).getColor();
 
