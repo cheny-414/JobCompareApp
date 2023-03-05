@@ -1,15 +1,20 @@
 package edu.gatech.seclass.jobcompare6300;
 
+import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 
+import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import androidx.annotation.IdRes;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.PerformException;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.espresso.util.HumanReadables;
 
@@ -116,5 +121,35 @@ public class TestUtils {
 		return new RecyclerViewMatcher(recyclerViewId);
 	}
 
+	public static Matcher<View> matchesBackgroundColor(final int expectedResourceId) {
+		return new BoundedMatcher<View, View>(View.class) {
+			int actualColor;
+			int expectedColor;
+			String message;
+
+			@Override
+			protected boolean matchesSafely(View item) {
+				if (item.getBackground() == null) {
+					message = item.getId() + " does not have a background";
+					return false;
+				}
+				Resources resources = item.getContext().getResources();
+				expectedColor = ResourcesCompat.getColor(resources, expectedResourceId, null);
+
+
+				actualColor = ((ColorDrawable) item.getBackground()).getColor();
+
+				return actualColor == expectedColor;
+			}
+			@Override
+			public void describeTo(final Description description) {
+				if (actualColor != 0) { message = "Background color did not match: Expected "
+						+  String.format("#%06X", (0xFFFFFF & expectedColor))
+						+ " was " + String.format("#%06X", (0xFFFFFF & actualColor));
+				}
+				description.appendText(message);
+			}
+		};
+	}
 }
 
