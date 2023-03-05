@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enter_current_job">Enter Current Job</string>
+    <string name="adjust_comparison_settings">Adjust Comparison Settings</string>
+    <string name="title">Title</string>
+    <string name="company">Company</string>
+    <string name="location">Location</string>
+    <string name="cost_of_living_index">Cost of living Index</string>
+    <string name="yearly_salary">Yearly Salary</string>
+    <string name="yearly_bonus">Yearly Bonus</string>
+    <string name="restricted_stock_unit_award">Restricted Stock Unit Award</string>
+    <string name="relocation_stipend">Relocation stipend</string>
+    <string name="personal_choice_holidays">Personal Choice Holidays</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_of_the_job">Title of the Job</string>
+    <string name="hint_value_of_cost_of_living_index">Value of cost of living index</string>
+    <string name="yearly_salary_weight">Yearly Salary Weight</string>
+    <string name="yearly_bonus_weight">Yearly Bonus Weight</string>
+    <string name="restricted_stock_unit_award_weight">Restricted Stock Unit Award Weight</string>
+    <string name="relocation_stipend_weight">Relocation Stipend Weight</string>
+    <string name="personal_choice_holidays_weight">Personal Choice Holidays Weight</string>
+    <string name="compare">Compare</string>
+    <string name="job_score">Job Score</string>
+</resources>
