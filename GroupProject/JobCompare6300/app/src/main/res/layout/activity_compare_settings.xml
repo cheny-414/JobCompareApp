@@ -1,0 +1,138 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/tvYearlySalaryWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_gravity="center_vertical"
+                android:text="@string/yearly_salary_weight" />
+
+        <com.google.android.material.slider.Slider
+                android:id="@+id/slYearlySalaryWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                app:labelBehavior="floating"
+                android:valueFrom="1"
+                android:valueTo="5"
+                android:stepSize="1"
+                android:value="1" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/tvYearlyBonusWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_gravity="center_vertical"
+                android:text="@string/yearly_bonus_weight" />
+
+        <com.google.android.material.slider.Slider
+                android:id="@+id/slYearlyBonusWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:labelBehavior="floating"
+                android:layout_weight="0.6"
+                android:valueFrom="1"
+                android:valueTo="5"
+                android:stepSize="1"
+                android:value="1" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/tvRsuaWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_gravity="center_vertical"
+                android:text="@string/restricted_stock_unit_award_weight" />
+
+        <com.google.android.material.slider.Slider
+                android:id="@+id/slRsuaWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:labelBehavior="floating"
+                android:layout_weight="0.6"
+                android:valueFrom="1"
+                android:valueTo="5"
+                android:stepSize="1"
+                android:value="1" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/tvRelocStipendWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_gravity="center_vertical"
+                android:text="@string/relocation_stipend_weight" />
+
+        <com.google.android.material.slider.Slider
+                android:id="@+id/slRelocStipendWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:labelBehavior="floating"
+                android:layout_weight="0.6"
+                android:valueFrom="1"
+                android:valueTo="5"
+                android:stepSize="1"
+                android:value="1" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/tvPcHolidayWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_gravity="center_vertical"
+                android:text="@string/personal_choice_holidays_weight" />
+
+        <com.google.android.material.slider.Slider
+                android:id="@+id/slPcHolidayWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:labelBehavior="floating"
+                android:layout_weight="0.6"
+                android:valueFrom="1"
+                android:valueTo="5"
+                android:stepSize="1"
+                android:value="1" />
+    </LinearLayout>
+</LinearLayout>

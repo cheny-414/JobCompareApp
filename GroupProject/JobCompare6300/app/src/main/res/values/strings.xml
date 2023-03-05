@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">JobCompare6300</string>
+    <string name="enter_job_offer">Enter Job Offer</string>
+    <string name="enter_current_job">Enter Current Job</string>
+    <string name="compare_job_offers">Compare Job Offers</string>
+    <string name="adjust_comparison_settings">Adjust Comparison Settings</string>
+    <string name="title">Title</string>
+    <string name="company">Company</string>
+    <string name="location">Location</string>
+    <string name="cost_of_living_index">Cost of living Index</string>
+    <string name="yearly_salary">Yearly Salary</string>
+    <string name="yearly_bonus">Yearly Bonus</string>
+    <string name="restricted_stock_unit_award">Restricted Stock Unit Award</string>
+    <string name="relocation_stipend">Relocation stipend</string>
+    <string name="personal_choice_holidays">Personal Choice Holidays</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="hint_title_of_the_job">Title of the Job</string>
+    <string name="hint_name_of_the_company">Name of the company</string>
+    <string name="hint_location_of_the_company">Entered as city and state</string>
+    <string name="hint_value_of_cost_of_living_index">Expressed as an index</string>
+    <string name="hint_yearly_salary">Yearly Salary in $</string>
+    <string name="hint_yearly_bonus">Yearly Bonus in $</string>
+    <string name="hint_rsua">Expressed as a lump sum vested over 4 years</string>
+    <string name="hint_reloc_stipend">A single value from $0 to $25,000</string>
+    <string name="hint_pc_holidays">A single overall number of days from 0 to 20</string>
+    <string name="yearly_salary_weight">Yearly Salary Weight</string>
+    <string name="yearly_bonus_weight">Yearly Bonus Weight</string>
+    <string name="restricted_stock_unit_award_weight">Restricted Stock Unit Award Weight</string>
+    <string name="relocation_stipend_weight">Relocation Stipend Weight</string>
+    <string name="personal_choice_holidays_weight">Personal Choice Holidays Weight</string>
+    <string name="compare">Compare</string>
+    <string name="job_score">Job Score</string>
+</resources>
