@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -49,13 +50,21 @@ import static org.hamcrest.CoreMatchers.not;
 @RunWith(AndroidJUnit4.class)
 public class CurrentJobUITest {
 
-	@Rule public ActivityScenarioRule<MainActivity> mainActivityActivityScenarioRule
-			= new ActivityScenarioRule<>(MainActivity.class);
+	private View decorView;
 
+	@Rule
+	public ActivityScenarioRule<MainActivity> tActivityRule = new ActivityScenarioRule<>(
+			MainActivity.class);
 
 	@Before
 	public void setUp() {
 		Intents.init();
+		tActivityRule.getScenario().onActivity(new ActivityScenario.ActivityAction<MainActivity>() {
+			@Override
+			public void perform(MainActivity activity) {
+				decorView = activity.getWindow().getDecorView();
+			}
+		});
 	}
 
 
@@ -64,6 +73,80 @@ public class CurrentJobUITest {
 		onView(withId(viewId)).perform(clearText(), replaceText(stringToBeSet), closeSoftKeyboard());
 	}
 
+	@Test
+	public void currentJobEmptyTest() {
+		//Empty Database
+		List<JobEntity> jobs = new ArrayList<>(ApplicationController.getInstance().getJobs());
+		for (JobEntity job : jobs) {
+			ApplicationController.getInstance().removeJob(job);
+		}
+
+		onView(withId(R.id.btnCurrentJob)).perform(click());
+		onView(withId(R.id.etTitle)).check(matches(withText("")));
+		onView(withId(R.id.etCompany)).check(matches(withText("")));
+		onView(withId(R.id.etLocation)).check(matches(withText("")));
+		onView(withId(R.id.etCostIndex)).check(matches(withText("")));
+		onView(withId(R.id.etYearlySalary)).check(matches(withText("")));
+		onView(withId(R.id.etYearlyBonus)).check(matches(withText("")));
+		onView(withId(R.id.etRsua)).check(matches(withText("")));
+		onView(withId(R.id.etRelocStipend)).check(matches(withText("")));
+		onView(withId(R.id.etPcHolidays)).check(matches(withText("")));
+	}
+
+	@Test
+	public void currentJobFilledTest() {
+		//Empty Database
+		List<JobEntity> jobs = new ArrayList<>(ApplicationController.getInstance().getJobs());
+		for (JobEntity job : jobs) {
+			ApplicationController.getInstance().removeJob(job);
+		}
+
+		onView(withId(R.id.btnCurrentJob)).perform(click());
+
+		replaceTextHelper(R.id.etTitle, "My Current Title");
+		replaceTextHelper(R.id.etCompany, "My Current Company");
+		replaceTextHelper(R.id.etLocation, "My Current Location");
+		replaceTextHelper(R.id.etCostIndex, "50");
+		replaceTextHelper(R.id.etYearlySalary, "1000");
+		replaceTextHelper(R.id.etYearlyBonus, "1000");
+		replaceTextHelper(R.id.etRsua, "500");
+		replaceTextHelper(R.id.etRelocStipend, "500");
+		replaceTextHelper(R.id.etPcHolidays, "10");
+
+		onView(withId(R.id.action_save)).perform(click());
+		onView(withId(R.id.btnCurrentJob)).perform(click());
+
+		onView(withId(R.id.etTitle)).check(matches(withText("My Current Title")));
+		onView(withId(R.id.etCompany)).check(matches(withText("My Current Company")));
+		onView(withId(R.id.etLocation)).check(matches(withText("My Current Location")));
+		onView(withId(R.id.etCostIndex)).check(matches(withText("50")));
+		onView(withId(R.id.etYearlySalary)).check(matches(withText("1000.00")));
+		onView(withId(R.id.etYearlyBonus)).check(matches(withText("1000.00")));
+		onView(withId(R.id.etRsua)).check(matches(withText("500.00")));
+		onView(withId(R.id.etRelocStipend)).check(matches(withText("500.00")));
+		onView(withId(R.id.etPcHolidays)).check(matches(withText("10")));
+	}
+
+	@Test
+	public void emptySaveCurrentJobTest() {
+		//Empty Database
+		List<JobEntity> jobs = new ArrayList<>(ApplicationController.getInstance().getJobs());
+		for (JobEntity job : jobs) {
+			ApplicationController.getInstance().removeJob(job);
+		}
+
+		onView(withId(R.id.btnCurrentJob)).perform(click());
+		onView(withId(R.id.action_save)).perform(click());
+
+		onView(withId(R.id.etTitle)).check(matches(hasErrorText("Job title cannot be empty")));
+		onView(withId(R.id.etCompany)).check(matches(hasErrorText("Company name cannot be empty")));
+		onView(withId(R.id.etCostIndex)).check(matches(hasErrorText("Cost index cannot be empty")));
+		onView(withId(R.id.etYearlySalary)).check(matches(hasErrorText("Yearly salary cannot be empty")));
+		onView(withId(R.id.etYearlyBonus)).check(matches(hasErrorText("Yearly bonus cannot be empty")));
+		onView(withId(R.id.etRsua)).check(matches(hasErrorText("Restricted Stock Unit Award cannot be empty")));
+		onView(withId(R.id.etRelocStipend)).check(matches(hasErrorText("Relocation stipend cannot be empty")));
+		onView(withId(R.id.etPcHolidays)).check(matches(hasErrorText("Personal Choice Holidays cannot be empty")));
+	}
 
 	@Test
 	public void testAddCurrentJob() throws InterruptedException {
