@@ -1,5 +1,11 @@
 package edu.gatech.seclass.jobcompare6300;
 
+/*
+  From github.com user "dannyroa", source:
+  https://github.com/dannyroa/espresso-samples/tree/master/RecyclerView/app/src/androidTest/java/com/dannyroa/espresso_samples/recyclerview
+ */
+
+
 import android.content.res.Resources;
 import android.view.View;
 import org.hamcrest.Description;

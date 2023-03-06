@@ -35,10 +35,13 @@ import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
+import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
 import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 
@@ -157,20 +160,42 @@ public class CurrentJobUITest {
 		onView(withId(R.id.btnCurrentJob)).perform(click());
 		intended(hasComponent(JobActivity.class.getName()));
 
-		replaceTextHelper(R.id.etTitle, "My Current Title");
-		replaceTextHelper(R.id.etCompany, "My Current Company");
-		replaceTextHelper(R.id.etLocation, "My Current Location");
+		String title = "Senior Analyst";
+		String company = "Company AAA";
+		String location = "Philadelphia, PA";
+		String costIndex = "167";
+		String salary = "100000";
+		String bonus = "30000";
+		String rusa = "900";
+		String relo = "8000";
+		String pch = "20";
 
-		replaceTextHelper(R.id.etCostIndex, "50");
-		replaceTextHelper(R.id.etYearlySalary, "1000");
-		replaceTextHelper(R.id.etYearlyBonus, "1000");
+		replaceTextHelper(R.id.etTitle, title);
+		replaceTextHelper(R.id.etCompany, company);
+		replaceTextHelper(R.id.etLocation, location);
+		replaceTextHelper(R.id.etCostIndex, costIndex);
+		replaceTextHelper(R.id.etYearlySalary, salary);
+		replaceTextHelper(R.id.etYearlyBonus, bonus);
+		replaceTextHelper(R.id.etRsua, rusa);
+		replaceTextHelper(R.id.etRelocStipend, relo);
+		replaceTextHelper(R.id.etPcHolidays, pch);
 
-		replaceTextHelper(R.id.etRsua, "500");
-		replaceTextHelper(R.id.etRelocStipend, "500");
-		replaceTextHelper(R.id.etPcHolidays, "10");
-
-		Activity jobActivity = getCurrentActivity();
+//		Activity jobActivity = getCurrentActivity();
 		onView(withId(R.id.action_save)).perform(click());
+		onView(withId(R.id.btnCurrentJob)).perform(click());
+
+		onView(withId(R.id.etTitle)).check(matches(withText(title)));
+		onView(withId(R.id.etCompany)).check(matches(withText(company)));
+		onView(withId(R.id.etLocation)).check(matches(withText(location)));
+		onView(withId(R.id.etCostIndex)).check(matches(withText(costIndex)));
+		onView(withId(R.id.etYearlySalary)).check(matches(withText(salary + ".00")));
+		onView(withId(R.id.etYearlyBonus)).check(matches(withText(bonus + ".00")));
+		onView(withId(R.id.etRsua)).check(matches(withText(rusa + ".00")));
+		onView(withId(R.id.etRelocStipend)).check(matches(withText(relo + ".00")));
+		onView(withId(R.id.etPcHolidays)).check(matches(withText(pch)));
+
+		onView(withId(R.id.action_cancel)).perform(click());
+
 		//new ActivityScenarioRule<>(JobActivity.class).getScenario().onActivity(activity -> decorView = activity.getWindow().getDecorView());
 		//		onView(withText("Created a new job"))
 		//				.inRoot(withDecorView(Matchers.not(jobActivity.getWindow().getDecorView())))// Here we use decorView

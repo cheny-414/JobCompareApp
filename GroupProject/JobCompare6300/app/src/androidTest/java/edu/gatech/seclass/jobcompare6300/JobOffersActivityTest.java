@@ -56,7 +56,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isNotEnabled;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static edu.gatech.seclass.jobcompare6300.TestUtils.withRecyclerView;
-import static edu.gatech.seclass.jobcompare6300.TestUtils.matchesBackgroundColor;
+import static edu.gatech.seclass.jobcompare6300.TestUtilities.*;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -64,6 +64,16 @@ public class JobOffersActivityTest {
 
     @Rule public ActivityScenarioRule<JobOffersActivity> jobOffersActivityActivityScenarioRule
             = new ActivityScenarioRule<>(JobOffersActivity.class);
+
+    @Before
+    public void startUp(){
+        removeAllJobs();
+        loadJobs();
+    }
+//    @After
+//    public void tearDown(){
+//        removeAllJobs();
+//    }
 
     //testing whether the ranked list is shown as expected
     @Test
@@ -89,7 +99,7 @@ public class JobOffersActivityTest {
                 .check(matches(withText("Company CCC")));
         onView(withRecyclerView(R.id.rvJobOffers)
                 .atPositionOnView(1, R.id.tvJobScore))
-                .check(matches(withText("Score: 22357.9")));
+                .check(matches(withText("Score: 21657.1")));
 
 
 
@@ -177,6 +187,7 @@ public class JobOffersActivityTest {
     //Testing whether cancel/perform another comparison options are provided to users
     @Test
     public void testCompareJobOffersAndCancel() {
+        List<JobEntity> list = ApplicationController.getInstance().getJobs();
         onView(withRecyclerView(R.id.rvJobOffers)
                 .atPositionOnView(0, R.id.tvTitle))
                 .perform(longClick());
