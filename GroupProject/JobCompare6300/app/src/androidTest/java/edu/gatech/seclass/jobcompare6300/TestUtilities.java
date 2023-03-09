@@ -20,6 +20,8 @@ import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.espresso.util.HumanReadables;
 
+import com.google.android.material.slider.Slider;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -159,6 +161,41 @@ public class TestUtilities {
 
 	}
 
+	//	Methods to test sliders
+	//	Adapted from https://stackoverflow.com/questions/65390086/androidx-how-to-test-slider-in-ui-tests-espresso
+	public static Matcher<View> withValue(final float expectedValue) {
+		return new BoundedMatcher<View, Slider>(Slider.class) {
+			@Override
+			public void describeTo(Description description) {
+				description.appendText("expected: " + expectedValue);
+			}
+
+			@Override
+			protected boolean matchesSafely(Slider slider) {
+				return slider.getValue() == expectedValue;
+			}
+		};
+	}
+	public static ViewAction setValue(final float value) {
+		return new ViewAction() {
+			@Override
+			public String getDescription() {
+				return "Set Slider value to " + value;
+			}
+
+			@Override
+			public Matcher<View> getConstraints() {
+				return ViewMatchers.isAssignableFrom(Slider.class);
+			}
+
+			@Override
+			public void perform(UiController uiController, View view) {
+				Slider slider = (Slider) view;
+				slider.setValue(value);
+			}
+		};
+	}
+	//end of methods for slider testing
 
 }
 
