@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.gatech.seclass.jobcompare6300.db.JobCompareSettings;
 import edu.gatech.seclass.jobcompare6300.db.JobEntity;
 
 /**
@@ -41,6 +42,8 @@ public class TestUtilities {
 
 	public static LinkedList<JobEntity> testJobList = new LinkedList<>();
 
+
+//	Author: https://stackoverflow.com/questions/28742495/testing-background-color-espresso-android
 	public static Matcher<View> matchesBackgroundColor(final int expectedResourceId) {
 		return new BoundedMatcher<View, View>(View.class) {
 			int actualColor;
@@ -130,7 +133,32 @@ public class TestUtilities {
 		testJobList.add(jobOffer0);
 		testJobList.add(jobOffer1);
 		testJobList.add(jobOffer2);
+	}
+	public static void loadDefaultWeight(){
+
+		JobCompareSettings compareSettings = ApplicationController.getInstance().getJobCompareSettings();
+		compareSettings.setYearlySalaryWeight(1);
+		compareSettings.setYearlyBonusWeight(1);
+		compareSettings.setRsuaWeight(1);
+		compareSettings.setReloWeight(1);
+		compareSettings.setPchWeight(1);
+
+		ApplicationController.getInstance().updateJobCompareSettingsInDb(compareSettings);
 
 	}
+
+	public static void updateWeight(){
+		JobCompareSettings compareSettings = ApplicationController.getInstance().getJobCompareSettings();
+		compareSettings.setYearlySalaryWeight(1);
+		compareSettings.setYearlyBonusWeight(1);
+		compareSettings.setRsuaWeight(5);
+		compareSettings.setReloWeight(5);
+		compareSettings.setPchWeight(1);
+
+		ApplicationController.getInstance().updateJobCompareSettingsInDb(compareSettings);
+
+	}
+
+
 }
 
