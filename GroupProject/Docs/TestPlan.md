@@ -2,6 +2,11 @@
 
 **Author**: Puneeth, Feng, Yiliang, Alex
 
+**Version 2**
+* Some tests were added and some tests were rewritten to provide improved clarity to their purpose and execution steps.
+* The quality of the automated tests are shown through the coverage report which is now linked in section 2, with a screenshot of the top level report.
+
+
 ## 1 Testing Strategy
 
 ### 1.1 Overall strategy
@@ -40,8 +45,12 @@ The below image is a set of test jobs referenced as "default test jobs" in the t
 ![default test jobs](./images/TestCaseJobCompare1Input.png)
 <br>
 <br>
-Automated test case coverage report is located [here](./test-reports/index.html)
+Automated test case coverage report is located [here](https://github.gatech.edu/gt-omscs-se-2023spring/6300Spring23Team057/blob/gd4/GroupProject/Docs/test-reports/index.html), with a screenshot of the coverage below.
 <br>
+![coverage report screenshot](./images/coverage_report.png)
+<br>
+<br>
+
 
 | Test Case # | Purpose                                                              | Scope                         | Inputs                                                                       | Steps                                                                                                                                                                                                                         | Implemented in Method                                                                                 | Expected Result                                                                                                                                                                    | Actual result                                                                                        | Pass / Fail |
 |-------------|----------------------------------------------------------------------|-------------------------------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|-------------|
