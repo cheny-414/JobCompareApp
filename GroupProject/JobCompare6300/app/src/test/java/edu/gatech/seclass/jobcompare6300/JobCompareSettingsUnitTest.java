@@ -5,11 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Map;
-
-import edu.gatech.seclass.jobcompare6300.JobComparator;
-
-public class JobCompareSettingsTest {
+public class JobCompareSettingsUnitTest {
 
     private JobCompareSettings jobCompareSettings = new JobCompareSettings();
     private JobCompareSettings jobCompareSettings2 = new JobCompareSettings();

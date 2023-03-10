@@ -28,12 +28,15 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.slf4j.LoggerFactory;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.gatech.seclass.jobcompare6300.db.DatabaseManager;
 import edu.gatech.seclass.jobcompare6300.db.JobCompareSettings;
 import edu.gatech.seclass.jobcompare6300.db.JobEntity;
+import edu.gatech.seclass.jobcompare6300.db.dao.JobCompareSettingsDao;
 
 /**
  * Created by dannyroa on 5/9/15.
@@ -196,6 +199,18 @@ public class TestUtilities {
 		};
 	}
 	//end of methods for slider testing
+
+	public static int clearWeight() {
+
+		JobCompareSettingsDao jobCompareSettingsDao = DatabaseManager.getInstance().getDb().getJobCompareSettingsDao();
+		JobCompareSettings jobCompareSettings = jobCompareSettingsDao.loadCompareSettings();
+		try {
+			return jobCompareSettingsDao.delete(jobCompareSettings);
+		} catch (SQLException e) {
+//			logger.error(e.getMessage());
+		}
+		return -1;
+	}
 
 }
 

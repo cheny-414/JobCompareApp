@@ -6,12 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Map;
-import java.util.Optional;
 
 import edu.gatech.seclass.jobcompare6300.db.JobCompareSettings;
 import edu.gatech.seclass.jobcompare6300.db.JobEntity;
 
-public class JobComparatorTest {
+public class JobComparatorUnitTest {
 
     private JobEntity jobEntity1 = new JobEntity();
     private JobEntity jobEntity2 = new JobEntity();
