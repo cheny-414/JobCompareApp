@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JobComparator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">edu.gatech.seclass.jobcompare6300</a> &gt; <span class="el_source">JobComparator.java</span></div><h1>JobComparator.java</h1><pre class="source lang-java linenums">package edu.gatech.seclass.jobcompare6300;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import edu.gatech.seclass.jobcompare6300.db.JobCompareSettings;
+import edu.gatech.seclass.jobcompare6300.db.JobEntity;
+
+/**
+ * Created by Puneeth Reddy on 2/26/2023.
+ Initial version
+ */
+
+public class JobComparator {
+	public static final String ATTRIBUTE = &quot;Attribute&quot;;
+	public static final String JOB_1 = &quot;Job 1&quot;;
+	public static final String JOB_2 = &quot;Job 2&quot;;
+	public static final String TITLE = &quot;Title&quot;;
+	public static final String COMPANY = &quot;Company&quot;;
+	public static final String LOCATION = &quot;Location&quot;;
+	public static final String YEARLY_ADJUSTED_SALARY = &quot;Yearly Adjusted Salary&quot;;
+	public static final String YEARLY_ADJUSTED_BONUS = &quot;Yearly Adjusted Bonus&quot;;
+	public static final String RSUA = &quot;Restricted Stock Unit Award&quot;;
+	public static final String RELOC_STIPEND = &quot;Relocation stipend &quot;;
+	public static final String PC_HOLIDAYS = &quot;Personal Choice Holidays&quot;;
+	public static final String JOB_SCORE = &quot;Job Score&quot;;
+	public static final String IS_CURRENT_JOB = &quot;Is Current Job&quot;; //Feng added for current job indicator in the comparison results
+	private final JobEntity job1;
+	private final JobEntity job2;
+	private final JobCompareSettings jobCompareSettings;
+
+
+<span class="fc" id="L34">	public JobComparator(JobEntity job1, JobEntity job2, JobCompareSettings jobCompareSettings) {</span>
+<span class="fc" id="L35">		this.job1 = job1;</span>
+<span class="fc" id="L36">		this.job2 = job2;</span>
+<span class="fc" id="L37">		this.jobCompareSettings = jobCompareSettings;</span>
+<span class="fc" id="L38">	}</span>
+
+
+	public Map&lt;String, Integer&gt; compareJobs() {
+<span class="fc" id="L42">		Map&lt;String, Integer&gt; comparisonResult = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L43">		comparisonResult.put(ATTRIBUTE, 0);</span>
+<span class="fc" id="L44">		comparisonResult.put(TITLE, 0);</span>
+<span class="fc" id="L45">		comparisonResult.put(COMPANY, 0);</span>
+<span class="fc" id="L46">		comparisonResult.put(LOCATION, 0);</span>
+<span class="fc" id="L47">		comparisonResult.put(YEARLY_ADJUSTED_SALARY, Float.compare(job1.getYearlyAdjustedSalary(), job2.getYearlyAdjustedSalary()));</span>
+<span class="fc" id="L48">		comparisonResult.put(YEARLY_ADJUSTED_BONUS, Float.compare(job1.getYearlyAdjustedBonus(), job2.getYearlyAdjustedBonus()));</span>
+<span class="fc" id="L49">		comparisonResult.put(RSUA, Float.compare(job1.getRsua(), job2.getRsua()));</span>
+<span class="fc" id="L50">		comparisonResult.put(RELOC_STIPEND, Float.compare(job1.getRelocStipend(), job2.getRelocStipend()));</span>
+<span class="fc" id="L51">		comparisonResult.put(PC_HOLIDAYS, Integer.compare(job1.getPcHolidays(), job2.getPcHolidays()));</span>
+<span class="fc" id="L52">		comparisonResult.put(JOB_SCORE, Float.compare(calculateJobScore(this.job1, this.jobCompareSettings),</span>
+<span class="fc" id="L53">				calculateJobScore(this.job2, this.jobCompareSettings)));</span>
+<span class="fc" id="L54">		comparisonResult.put(IS_CURRENT_JOB, 0); //Feng added for current job indicator in the comparison results</span>
+<span class="fc" id="L55">		return comparisonResult;</span>
+	}
+
+
+	public JobEntity getJob1() {
+<span class="fc" id="L60">		return job1;</span>
+	}
+
+
+	public JobEntity getJob2() {
+<span class="fc" id="L65">		return job2;</span>
+	}
+
+
+	public static float calculateJobScore(JobEntity jobEntity, JobCompareSettings compareSettings) {
+<span class="fc" id="L70">		int salaryWeight = compareSettings.getYearlySalaryWeight();</span>
+<span class="fc" id="L71">		int bonusWeight = compareSettings.getYearlyBonusWeight();</span>
+<span class="fc" id="L72">		int stockAwardWeight = compareSettings.getRsuaWeight();</span>
+<span class="fc" id="L73">		int stipendWeight = compareSettings.getReloWeight();</span>
+<span class="fc" id="L74">		int holidayCountWeight = compareSettings.getPchWeight();</span>
+<span class="fc" id="L75">		float totalWeight = (salaryWeight + bonusWeight + stockAwardWeight + stipendWeight + holidayCountWeight) * 1.0f;</span>
+<span class="fc" id="L76">		return (salaryWeight / totalWeight) * jobEntity.getYearlyAdjustedSalary()</span>
+<span class="fc" id="L77">				+ (bonusWeight / totalWeight) * jobEntity.getYearlyAdjustedBonus()</span>
+<span class="fc" id="L78">				+ (stockAwardWeight / totalWeight) * (jobEntity.getRsua() / 4)</span>
+<span class="fc" id="L79">				+ (stipendWeight / totalWeight) * jobEntity.getRelocStipend()</span>
+<span class="fc" id="L80">				+ (holidayCountWeight / totalWeight) * (jobEntity.getPcHolidays() * jobEntity.getYearlyAdjustedSalary() / 260);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Generated by the Android Gradle plugin 7.3.1</div></body></html>

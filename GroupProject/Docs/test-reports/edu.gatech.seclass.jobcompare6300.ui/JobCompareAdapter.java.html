@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JobCompareAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">edu.gatech.seclass.jobcompare6300.ui</a> &gt; <span class="el_source">JobCompareAdapter.java</span></div><h1>JobCompareAdapter.java</h1><pre class="source lang-java linenums">package edu.gatech.seclass.jobcompare6300.ui;
+
+/**
+ * Created by Puneeth Reddy on 2/27/2023.
+ Initial version
+ */
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.android.material.card.MaterialCardView;
+import com.j256.ormlite.stmt.query.In;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import edu.gatech.seclass.jobcompare6300.JobComparator;
+import edu.gatech.seclass.jobcompare6300.R;
+import edu.gatech.seclass.jobcompare6300.db.JobEntity;
+
+public class JobCompareAdapter extends RecyclerView.Adapter&lt;JobCompareAdapter.ViewHolder&gt; {
+
+	private final Context context;
+	private final JobEntity job1;
+	private final JobEntity job2;
+	private final Map&lt;String, Integer&gt; compareResults;
+<span class="fc" id="L34">	private final List&lt;String&gt; mKeys = new ArrayList&lt;&gt;();</span>
+
+
+	// Constructor
+<span class="fc" id="L38">	public JobCompareAdapter(Context context, JobEntity job1, JobEntity job2, Map&lt;String, Integer&gt; compareResults) {</span>
+<span class="fc" id="L39">		this.context = context;</span>
+<span class="fc" id="L40">		this.job1 = job1;</span>
+<span class="fc" id="L41">		this.job2 = job2;</span>
+<span class="fc" id="L42">		this.compareResults = compareResults;</span>
+<span class="fc" id="L43">		mKeys.addAll(compareResults.keySet());</span>
+<span class="fc" id="L44">	}</span>
+
+
+	@NonNull
+	@Override
+	public JobCompareAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		// to inflate the layout for each item of recycler view.
+<span class="fc" id="L51">		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_job_compare_card, parent, false);</span>
+<span class="fc" id="L52">		return new JobCompareAdapter.ViewHolder(view);</span>
+	}
+
+
+	@Override public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+<span class="fc bfc" id="L57" title="All 2 branches covered.">		if (position == 0) {</span>
+<span class="fc" id="L58">			holder.tvJobAttributeName.setText(JobComparator.ATTRIBUTE);</span>
+<span class="fc" id="L59">			holder.tvJobAttributeName.setTextSize(24.0f);</span>
+<span class="fc" id="L60">			holder.tvJob1Attribute.setText(JobComparator.JOB_1);</span>
+<span class="fc" id="L61">			holder.tvJob1Attribute.setTextSize(24.0f);</span>
+<span class="fc" id="L62">			holder.tvJob2Attribute.setText(JobComparator.JOB_2);</span>
+<span class="fc" id="L63">			holder.tvJob2Attribute.setTextSize(24.0f);</span>
+		}
+		else {
+<span class="fc" id="L66">			String key = this.mKeys.get(position);</span>
+<span class="fc" id="L67">			Integer result = this.compareResults.get(this.mKeys.get(position));</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">			if (null != result) {</span>
+<span class="fc" id="L69">				holder.tvJobAttributeName.setText(key);</span>
+<span class="fc" id="L70">				holder.tvJob1Attribute.setText(getAttribute(key, job1));</span>
+<span class="fc" id="L71">				holder.tvJob1Attribute.setBackgroundResource(getTextColor(result));</span>
+<span class="fc" id="L72">				holder.tvJob2Attribute.setText(getAttribute(key, job2));</span>
+<span class="fc" id="L73">				holder.tvJob2Attribute.setBackgroundResource(getTextColor(result * -1));</span>
+			}
+		}
+<span class="fc" id="L76">	}</span>
+
+
+	private int getTextColor(Integer result) {
+<span class="fc bfc" id="L80" title="All 2 branches covered.">		if (result &gt; 0) {</span>
+<span class="fc" id="L81">			return R.color.green;</span>
+		}
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		if (result &lt; 0) {</span>
+<span class="fc" id="L84">			return R.color.red;</span>
+		}
+<span class="fc" id="L86">		return R.color.white;</span>
+	}
+
+
+	private String getAttribute(String key, JobEntity job) {
+<span class="fc bfc" id="L91" title="All 2 branches covered.">		if (JobComparator.TITLE.equals(key)) {</span>
+<span class="fc" id="L92">			return job.getTitle();</span>
+		}
+<span class="fc bfc" id="L94" title="All 2 branches covered.">		else if (JobComparator.COMPANY.equals(key)) {</span>
+<span class="fc" id="L95">			return job.getCompany();</span>
+		}
+<span class="fc bfc" id="L97" title="All 2 branches covered.">		else if (JobComparator.LOCATION.equals(key)) {</span>
+<span class="fc" id="L98">			return job.getLocation();</span>
+		}
+<span class="fc bfc" id="L100" title="All 2 branches covered.">		else if (JobComparator.YEARLY_ADJUSTED_SALARY.equals(key)) {</span>
+<span class="fc" id="L101">			return &quot;&quot; + job.getYearlyAdjustedSalary();</span>
+		}
+<span class="fc bfc" id="L103" title="All 2 branches covered.">		else if (JobComparator.YEARLY_ADJUSTED_BONUS.equals(key)) {</span>
+<span class="fc" id="L104">			return &quot;&quot; + job.getYearlyAdjustedBonus();</span>
+		}
+<span class="fc bfc" id="L106" title="All 2 branches covered.">		else if (JobComparator.RSUA.equals(key)) {</span>
+<span class="fc" id="L107">			return &quot;&quot; + job.getRsua();</span>
+		}
+<span class="fc bfc" id="L109" title="All 2 branches covered.">		else if (JobComparator.RELOC_STIPEND.equals(key)) {</span>
+<span class="fc" id="L110">			return &quot;&quot; + job.getRelocStipend();</span>
+		}
+<span class="fc bfc" id="L112" title="All 2 branches covered.">		else if (JobComparator.PC_HOLIDAYS.equals(key)) {</span>
+<span class="fc" id="L113">			return &quot;&quot; + job.getPcHolidays();</span>
+		}
+<span class="fc bfc" id="L115" title="All 2 branches covered.">		else if (JobComparator.JOB_SCORE.equals(key)) {</span>
+<span class="fc" id="L116">			return &quot;&quot; + job.getJobScore();</span>
+		}
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">		else if (JobComparator.IS_CURRENT_JOB.equals(key)){</span>
+<span class="fc" id="L119">			return job.isCurrentJobString();</span>
+		} //Feng added for current job indicator in the comparison results
+<span class="nc" id="L121">		return &quot;&quot;;</span>
+	}
+
+
+	@Override
+	public int getItemCount() {
+<span class="fc" id="L127">		return compareResults.size();</span>
+	}
+
+
+	// View holder class for initializing of your views such as TextView and Imageview
+	public static class ViewHolder extends RecyclerView.ViewHolder {
+		private final TextView tvJobAttributeName;
+		private final TextView tvJob1Attribute;
+		private final TextView tvJob2Attribute;
+
+
+		public ViewHolder(@NonNull View itemView) {
+<span class="fc" id="L139">			super(itemView);</span>
+<span class="fc" id="L140">			tvJobAttributeName = itemView.findViewById(R.id.tvJobAttributeName);</span>
+<span class="fc" id="L141">			tvJob1Attribute = itemView.findViewById(R.id.tvJob1Attribute);</span>
+<span class="fc" id="L142">			tvJob2Attribute = itemView.findViewById(R.id.tvJob2Attribute);</span>
+<span class="fc" id="L143">		}</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Generated by the Android Gradle plugin 7.3.1</div></body></html>

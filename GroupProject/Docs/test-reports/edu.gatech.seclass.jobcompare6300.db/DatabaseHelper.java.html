@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DatabaseHelper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">edu.gatech.seclass.jobcompare6300.db</a> &gt; <span class="el_source">DatabaseHelper.java</span></div><h1>DatabaseHelper.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (c) 2014-2022 Gutermann Technology GmbH. All rights reserved.
+ */
+package edu.gatech.seclass.jobcompare6300.db;
+
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+
+import org.slf4j.LoggerFactory;
+
+import java.sql.SQLException;
+
+import edu.gatech.seclass.jobcompare6300.db.dao.JobCompareSettingsDao;
+import edu.gatech.seclass.jobcompare6300.db.dao.JobCompareSettingsDaoImpl;
+import edu.gatech.seclass.jobcompare6300.db.dao.JobEntityDao;
+import edu.gatech.seclass.jobcompare6300.db.dao.JobEntityDaoImpl;
+
+/**
+ * The main access class for database related operations.
+ */
+public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
+
+<span class="fc" id="L31">	private static final org.slf4j.Logger log = LoggerFactory.getLogger(DatabaseHelper.class);</span>
+
+	// The current version of the database. Increase this when you add or change database objects.
+	private static final int DATABASE_VERSION = 1;
+
+	// The data access objects that we use for updating and retrieving database objects.
+	private JobEntityDao jobEntityDao;
+	private JobCompareSettingsDao jobCompareSettingsDao;
+
+
+	public DatabaseHelper(Context context) {
+<span class="fc" id="L42">		super(context, getDataBaseName(context), null, DATABASE_VERSION);</span>
+<span class="fc" id="L43">		log.info(&quot;Connecting to database {} using schema version {}&quot;, getDataBaseName(context), DATABASE_VERSION);</span>
+<span class="fc" id="L44">	}</span>
+
+
+	@Override
+	public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
+		try {
+			// Create the tables for each database object here.
+<span class="nc" id="L51">			log.debug(&quot;Creating database schema&quot;);</span>
+<span class="nc" id="L52">			createTablesIfNotExist();</span>
+		}
+<span class="nc" id="L54">		catch (SQLException e) {</span>
+<span class="nc" id="L55">			log.error(&quot;Database creation failed&quot;, e);</span>
+<span class="nc" id="L56">			throw new RuntimeException(e);</span>
+<span class="nc" id="L57">		}</span>
+<span class="nc" id="L58">	}</span>
+
+
+	@Override
+	public void onOpen(SQLiteDatabase db) {
+<span class="fc" id="L63">		super.onOpen(db);</span>
+<span class="fc" id="L64">		db.disableWriteAheadLogging();</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">		if (!db.isReadOnly()) {</span>
+			// Enable foreign key constraints (including cascading)
+<span class="fc" id="L67">			db.execSQL(&quot;PRAGMA foreign_keys=ON;&quot;);</span>
+		}
+<span class="fc" id="L69">	}</span>
+
+
+	@Override
+	public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
+		//Upgrade the database schema here for a particular version.
+<span class="nc" id="L75">		log.debug(&quot;Upgrading database schema from version {} to {}&quot;, oldVersion, newVersion);</span>
+<span class="nc" id="L76">	}</span>
+
+
+	public static String getDataBaseName(Context context) {
+<span class="fc" id="L80">		return getAppName(context) + &quot;.db&quot;;</span>
+	}
+
+
+	private static String getAppName(Context context) {
+<span class="fc" id="L85">		String appName = &quot;&quot;;</span>
+		try {
+<span class="fc" id="L87">			PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);</span>
+<span class="fc" id="L88">			CharSequence applicationLabel = context.getPackageManager().getApplicationLabel(packageInfo.applicationInfo);</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">			appName = applicationLabel != null ? applicationLabel.toString() : &quot;(unknown)&quot;;</span>
+		}
+<span class="nc" id="L91">		catch (Resources.NotFoundException | PackageManager.NameNotFoundException e) {</span>
+<span class="nc" id="L92">			log.error(e.getMessage());</span>
+<span class="fc" id="L93">		}</span>
+<span class="fc" id="L94">		return appName;</span>
+	}
+
+
+	/**
+	 * Creates the tables in the database. Used for testing.
+	 *
+	 * @throws SQLException
+	 */
+	public void createTablesIfNotExist() throws SQLException {
+		// Add any new table here.
+<span class="nc" id="L105">		TableUtils.createTableIfNotExists(connectionSource, JobEntity.class);</span>
+<span class="nc" id="L106">		TableUtils.createTableIfNotExists(connectionSource, JobCompareSettings.class);</span>
+<span class="nc" id="L107">	}</span>
+
+
+	/**
+	 * @return the {@link JobCompareSettingsDao} object.
+	 */
+	public JobCompareSettingsDao getJobCompareSettingsDao() {
+<span class="fc bfc" id="L114" title="All 2 branches covered.">		if (jobCompareSettingsDao == null)</span>
+<span class="fc" id="L115">			jobCompareSettingsDao = new JobCompareSettingsDaoImpl(this, createDao(JobCompareSettings.class, Integer.class));</span>
+<span class="fc" id="L116">		return jobCompareSettingsDao;</span>
+	}
+
+
+	/**
+	 * @return the {@link JobEntityDao} object.
+	 */
+	public JobEntityDao getJobEntityDao() {
+<span class="fc bfc" id="L124" title="All 2 branches covered.">		if (jobEntityDao == null)</span>
+<span class="fc" id="L125">			jobEntityDao = new JobEntityDaoImpl(this, createDao(JobEntity.class, Integer.class));</span>
+<span class="fc" id="L126">		return jobEntityDao;</span>
+	}
+
+
+	private &lt;T, ID&gt; Dao&lt;T, ID&gt; createDao(Class&lt;T&gt; dataClass, Class&lt;ID&gt; idClass) {
+		try {
+<span class="fc" id="L132">			Dao&lt;T, ID&gt; dao = getDao(dataClass);</span>
+<span class="fc" id="L133">			dao.setObjectCache(true);</span>
+<span class="fc" id="L134">			return dao;</span>
+		}
+<span class="nc" id="L136">		catch (SQLException e) {</span>
+<span class="nc" id="L137">			throw new RuntimeException(e);</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Generated by the Android Gradle plugin 7.3.1</div></body></html>

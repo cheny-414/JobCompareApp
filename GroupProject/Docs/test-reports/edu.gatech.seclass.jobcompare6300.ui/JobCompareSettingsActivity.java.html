@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JobCompareSettingsActivity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">edu.gatech.seclass.jobcompare6300.ui</a> &gt; <span class="el_source">JobCompareSettingsActivity.java</span></div><h1>JobCompareSettingsActivity.java</h1><pre class="source lang-java linenums">package edu.gatech.seclass.jobcompare6300.ui;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.android.material.slider.Slider;
+
+import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
+
+import androidx.appcompat.app.AppCompatActivity;
+import edu.gatech.seclass.jobcompare6300.ApplicationController;
+import edu.gatech.seclass.jobcompare6300.R;
+import edu.gatech.seclass.jobcompare6300.db.JobCompareSettings;
+
+<span class="fc" id="L20">public class JobCompareSettingsActivity extends AppCompatActivity {</span>
+<span class="fc" id="L21">	private final ApplicationController instance = ApplicationController.getInstance();</span>
+	private Slider slYearlySalaryWeight, slYearlyBonusWeight, slRsuaWeight,
+			slRelocStipendWeight, slPcHolidaysWeight;
+<span class="fc" id="L24">	private final org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());</span>
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+<span class="fc" id="L29">		super.onCreate(savedInstanceState);</span>
+<span class="fc" id="L30">		setContentView(R.layout.activity_compare_settings);</span>
+<span class="fc" id="L31">		slYearlySalaryWeight = (Slider) findViewById(R.id.slYearlySalaryWeight);</span>
+<span class="fc" id="L32">		slYearlyBonusWeight = (Slider) findViewById(R.id.slYearlyBonusWeight);</span>
+<span class="fc" id="L33">		slRsuaWeight = (Slider) findViewById(R.id.slRsuaWeight);</span>
+<span class="fc" id="L34">		slRelocStipendWeight = (Slider) findViewById(R.id.slRelocStipendWeight);</span>
+<span class="fc" id="L35">		slPcHolidaysWeight = (Slider) findViewById(R.id.slPcHolidayWeight);</span>
+<span class="fc" id="L36">		String actionBarTitle = getIntent().getStringExtra(MainActivity.INTENT_ACTION_BAR_TITLE);</span>
+<span class="pc bpc" id="L37" title="1 of 4 branches missed.">		if (actionBarTitle == null || actionBarTitle.isEmpty()) {</span>
+<span class="fc" id="L38">			actionBarTitle = getString(R.string.app_name);</span>
+		}
+<span class="fc" id="L40">		Objects.requireNonNull(getSupportActionBar()).setTitle(actionBarTitle);</span>
+<span class="fc" id="L41">		JobCompareSettings compareSettings = instance.getJobCompareSettings();</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">		if (null != compareSettings) {</span>
+<span class="fc" id="L43">			updateJobCompareSettings(compareSettings);</span>
+		}
+<span class="fc" id="L45">	}</span>
+
+
+	private void updateJobCompareSettings(JobCompareSettings compareSettings) {
+<span class="fc" id="L49">		slYearlySalaryWeight.setValue(compareSettings.getYearlySalaryWeight());</span>
+<span class="fc" id="L50">		slYearlyBonusWeight.setValue(compareSettings.getYearlyBonusWeight());</span>
+<span class="fc" id="L51">		slRsuaWeight.setValue(compareSettings.getRsuaWeight());</span>
+<span class="fc" id="L52">		slRelocStipendWeight.setValue(compareSettings.getReloWeight());</span>
+<span class="fc" id="L53">		slPcHolidaysWeight.setValue(compareSettings.getPchWeight());</span>
+<span class="fc" id="L54">	}</span>
+
+
+	private JobCompareSettings buildCompareSettings() {
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">		JobCompareSettings compareSettings = (instance.getJobCompareSettings() == null) ? new JobCompareSettings() : instance.getJobCompareSettings();</span>
+<span class="fc" id="L59">		compareSettings.setYearlySalaryWeight((int) slYearlySalaryWeight.getValue());</span>
+<span class="fc" id="L60">		compareSettings.setYearlyBonusWeight((int) slYearlyBonusWeight.getValue());</span>
+<span class="fc" id="L61">		compareSettings.setRsuaWeight((int) slRsuaWeight.getValue());</span>
+<span class="fc" id="L62">		compareSettings.setReloWeight((int) slRelocStipendWeight.getValue());</span>
+<span class="fc" id="L63">		compareSettings.setPchWeight((int) slPcHolidaysWeight.getValue());</span>
+<span class="fc" id="L64">		return compareSettings;</span>
+	}
+
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+<span class="fc" id="L70">		getMenuInflater().inflate(R.menu.save_cancel_menu, menu);</span>
+<span class="fc" id="L71">		return true;</span>
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">		if (item.getItemId() == R.id.action_save) {</span>
+<span class="fc" id="L78">			boolean settingsSaved = validateAndSaveSettings();</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">			if (settingsSaved) {</span>
+<span class="fc" id="L80">				Intent intent = new Intent(this, MainActivity.class);</span>
+<span class="fc" id="L81">				startActivity(intent);</span>
+			}
+		}
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">		if (item.getItemId() == R.id.action_cancel) {</span>
+<span class="nc" id="L85">			Intent intent = new Intent(this, MainActivity.class);</span>
+<span class="nc" id="L86">			startActivity(intent);</span>
+		}
+<span class="fc" id="L88">		return (super.onOptionsItemSelected(item));</span>
+	}
+
+
+	private boolean validateAndSaveSettings() {
+<span class="fc" id="L93">		JobCompareSettings compareSettings = buildCompareSettings();</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">		if (instance.getJobCompareSettings() == null) {</span>
+<span class="nc" id="L95">			logger.info(&quot;Creating a new job compare settings..&quot;);</span>
+<span class="nc" id="L96">			int created = instance.createJobCompareSettingsInDb(compareSettings);</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">			if (created == 1) {</span>
+<span class="nc" id="L98">				Toast.makeText(this, &quot;Created a job compare settings&quot;, Toast.LENGTH_LONG).show();</span>
+			}
+<span class="nc" id="L100">		}</span>
+		else {
+<span class="fc" id="L102">			logger.info(&quot;Updating a existing job compare settings..&quot;);</span>
+<span class="fc" id="L103">			int updated = instance.updateJobCompareSettingsInDb(compareSettings);</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">			if (updated == 1) {</span>
+<span class="fc" id="L105">				Toast.makeText(this, &quot;Updated job compare settings&quot;, Toast.LENGTH_LONG).show();</span>
+			}
+		}
+<span class="fc" id="L108">		return true;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Generated by the Android Gradle plugin 7.3.1</div></body></html>

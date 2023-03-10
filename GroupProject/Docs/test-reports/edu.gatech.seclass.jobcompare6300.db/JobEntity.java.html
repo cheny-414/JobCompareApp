@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JobEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">edu.gatech.seclass.jobcompare6300.db</a> &gt; <span class="el_source">JobEntity.java</span></div><h1>JobEntity.java</h1><pre class="source lang-java linenums">package edu.gatech.seclass.jobcompare6300.db;
+
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.Objects;
+
+@DatabaseTable
+public class JobEntity {
+	@DatabaseField(generatedId = true)
+	private int id;
+
+	@DatabaseField(canBeNull = false)
+	private String title;
+
+	@DatabaseField(canBeNull = false)
+	private String company;
+
+	@DatabaseField(canBeNull = false)
+	private String location;
+
+	@DatabaseField(canBeNull = false)
+	private int costIndex;
+
+	@DatabaseField(canBeNull = false)
+	private float yearlySalary;
+
+	@DatabaseField(canBeNull = false)
+	private float yearlyBonus;
+
+	@DatabaseField(canBeNull = false)
+	private float rsua;
+
+	@DatabaseField(canBeNull = false)
+	private float relocStipend;
+
+	@DatabaseField(canBeNull = false)
+	private int pcHolidays;
+
+	@DatabaseField
+	private boolean isCurrentJob;
+
+	@DatabaseField
+	private float yearlyAdjustedSalary;
+
+	@DatabaseField
+	private float yearlyAdjustedBonus;
+
+	@DatabaseField
+	private float jobScore;
+
+	// --------------------------------------------------------------------------------------------|
+	// -----[  Constructors  ]---------------------------------------------------------------------|
+	// --------------------------------------------------------------------------------------------|
+
+
+<span class="fc" id="L57">	public JobEntity() {</span>
+		// no-arg constructor for ORMLite
+<span class="fc" id="L59">	}</span>
+
+
+	public int getId() {
+<span class="fc" id="L63">		return id;</span>
+	}
+
+
+	public void setId(int id) {
+<span class="nc" id="L68">		this.id = id;</span>
+<span class="nc" id="L69">	}</span>
+
+
+	public String getTitle() {
+<span class="fc" id="L73">		return title;</span>
+	}
+
+
+	public void setTitle(String title) {
+<span class="fc" id="L78">		this.title = title;</span>
+<span class="fc" id="L79">	}</span>
+
+
+	public String getCompany() {
+<span class="fc" id="L83">		return company;</span>
+	}
+
+
+	public void setCompany(String company) {
+<span class="fc" id="L88">		this.company = company;</span>
+<span class="fc" id="L89">	}</span>
+
+
+	public String getLocation() {
+<span class="fc" id="L93">		return location;</span>
+	}
+
+
+	public void setLocation(String location) {
+<span class="fc" id="L98">		this.location = location;</span>
+<span class="fc" id="L99">	}</span>
+
+
+	public int getCostIndex() {
+<span class="fc" id="L103">		return costIndex;</span>
+	}
+
+
+	public void setCostIndex(int costIndex) {
+<span class="fc" id="L108">		this.costIndex = costIndex;</span>
+<span class="fc" id="L109">	}</span>
+
+
+	public float getYearlySalary() {
+<span class="fc" id="L113">		return yearlySalary;</span>
+	}
+
+
+	public void setYearlySalary(float yearlySalary) {
+<span class="fc" id="L118">		this.yearlySalary = yearlySalary;</span>
+<span class="fc" id="L119">	}</span>
+
+
+	public float getYearlyBonus() {
+<span class="fc" id="L123">		return yearlyBonus;</span>
+	}
+
+
+	public void setYearlyBonus(float yearlyBonus) {
+<span class="fc" id="L128">		this.yearlyBonus = yearlyBonus;</span>
+<span class="fc" id="L129">	}</span>
+
+
+	public float getRsua() {
+<span class="fc" id="L133">		return rsua;</span>
+	}
+
+
+	public void setRsua(float rsua) {
+<span class="fc" id="L138">		this.rsua = rsua;</span>
+<span class="fc" id="L139">	}</span>
+
+
+	public float getRelocStipend() {
+<span class="fc" id="L143">		return relocStipend;</span>
+	}
+
+
+	public void setRelocStipend(float relocStipend) {
+<span class="fc" id="L148">		this.relocStipend = relocStipend;</span>
+<span class="fc" id="L149">	}</span>
+
+
+	public int getPcHolidays() {
+<span class="fc" id="L153">		return pcHolidays;</span>
+	}
+
+
+	public void setPcHolidays(int pcHolidays) {
+<span class="fc" id="L158">		this.pcHolidays = pcHolidays;</span>
+<span class="fc" id="L159">	}</span>
+
+
+	public boolean isCurrentJob() {
+<span class="fc" id="L163">		return isCurrentJob;</span>
+	}
+
+	public String isCurrentJobString() {
+<span class="fc bfc" id="L167" title="All 2 branches covered.">		if(isCurrentJob == false){</span>
+<span class="fc" id="L168">			return &quot;N&quot;;</span>
+		}
+		else{
+<span class="fc" id="L171">			return &quot;Y&quot;;</span>
+		}
+
+	} //Feng added for current job indicator in the comparison results
+
+	public void setCurrentJob(boolean currentJob) {
+<span class="fc" id="L177">		isCurrentJob = currentJob;</span>
+<span class="fc" id="L178">	}</span>
+
+
+	public float getYearlyAdjustedSalary() {
+<span class="fc" id="L182">		return yearlyAdjustedSalary;</span>
+	}
+
+
+	public void setYearlyAdjustedSalary(float yearlyAdjustedSalary) {
+<span class="fc" id="L187">		this.yearlyAdjustedSalary = yearlyAdjustedSalary;</span>
+<span class="fc" id="L188">	}</span>
+
+
+	public float getYearlyAdjustedBonus() {
+<span class="fc" id="L192">		return yearlyAdjustedBonus;</span>
+	}
+
+
+	public void setYearlyAdjustedBonus(float yearlyAdjustedBonus) {
+<span class="fc" id="L197">		this.yearlyAdjustedBonus = yearlyAdjustedBonus;</span>
+<span class="fc" id="L198">	}</span>
+
+
+	public float getJobScore() {
+<span class="fc" id="L202">		return jobScore;</span>
+	}
+
+
+	public void setJobScore(float jobScore) {
+<span class="fc" id="L207">		this.jobScore = jobScore;</span>
+<span class="fc" id="L208">	}</span>
+
+
+	@Override
+	public boolean equals(Object other) {
+<span class="pc bpc" id="L213" title="2 of 4 branches missed.">		return other instanceof JobEntity &amp;&amp; getId() == ((JobEntity) other).getId();</span>
+	}
+
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L219">		return Objects.hash(id);</span>
+	}
+
+
+	@Override
+	public String toString() {
+<span class="fc" id="L225">		return &quot;JobOffer{&quot; +</span>
+				&quot;title=&quot; + title +
+				&quot;, Company=&quot; + company +
+				&quot;, Score=&quot; + jobScore +
+				'}';
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Generated by the Android Gradle plugin 7.3.1</div></body></html>
