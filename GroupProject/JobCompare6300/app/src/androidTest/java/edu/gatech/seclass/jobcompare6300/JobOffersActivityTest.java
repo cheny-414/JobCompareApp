@@ -14,6 +14,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -423,33 +424,32 @@ public class JobOffersActivityTest {
 		onView(withId(R.id.rvJobOffers)).check(matches(isDisplayed()));
 	}
 
-//	@Test
-//	public void addJobAndCompareToCurrentJobWithNoCurrentJobSaved() {
-//		removeAllJobs();
-//		ActivityScenario<MainActivity> jobOfferCompareScenario
-//				= ActivityScenario.launch(MainActivity.class);
-//
-//		onView(withId(R.id.btnJobOffer)).perform(click());
-//
-//		String title = "Lead Analyst";
-//		String company = "Company BBB";
-//		String location = "San Francisco, CA";
-//
-//		replaceTextHelper(R.id.etTitle, title);
-//		replaceTextHelper(R.id.etCompany, company);
-//		replaceTextHelper(R.id.etLocation, location);
-//		replaceTextHelper(R.id.etCostIndex, Integer.toString(204));
-//		replaceTextHelper(R.id.etYearlySalary, Integer.toString(130000));
-//		replaceTextHelper(R.id.etYearlyBonus, Integer.toString(40000));
-//		replaceTextHelper(R.id.etRsua, Integer.toString(800));
-//		replaceTextHelper(R.id.etRelocStipend, Integer.toString(12000));
-//		replaceTextHelper(R.id.etPcHolidays, Integer.toString(15));
-//		onView(withId(R.id.action_save)).perform(click());
-//		onView(withText("Compare with current job")).perform(click());
-//		onView(withText("Add current job first for comparison"))
-//				.inRoot(new ToastMatcher())
-//				.check(matches(isDisplayed()));
-//
-//
-//	}
+	@Ignore
+	@Test
+	public void addJobAndCompareToCurrentJobWithNoCurrentJobSaved() {
+		removeAllJobs();
+		ActivityScenario<MainActivity> jobOfferCompareScenario
+				= ActivityScenario.launch(MainActivity.class);
+
+		onView(withId(R.id.btnJobOffer)).perform(click());
+
+		String title = "Lead Analyst";
+		String company = "Company BBB";
+		String location = "San Francisco, CA";
+
+		replaceTextHelper(R.id.etTitle, title);
+		replaceTextHelper(R.id.etCompany, company);
+		replaceTextHelper(R.id.etLocation, location);
+		replaceTextHelper(R.id.etCostIndex, Integer.toString(204));
+		replaceTextHelper(R.id.etYearlySalary, Integer.toString(130000));
+		replaceTextHelper(R.id.etYearlyBonus, Integer.toString(40000));
+		replaceTextHelper(R.id.etRsua, Integer.toString(800));
+		replaceTextHelper(R.id.etRelocStipend, Integer.toString(12000));
+		replaceTextHelper(R.id.etPcHolidays, Integer.toString(15));
+		onView(withId(R.id.action_save)).perform(click());
+		onView(withText("Compare with current job")).perform(click());
+		onView(withText("Add current job first for comparison"))
+				.inRoot(new ToastMatcher())
+				.check(matches(isDisplayed()));
+	}
 }
