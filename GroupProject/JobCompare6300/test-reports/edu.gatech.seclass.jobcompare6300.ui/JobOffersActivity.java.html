@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JobOffersActivity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">edu.gatech.seclass.jobcompare6300.ui</a> &gt; <span class="el_source">JobOffersActivity.java</span></div><h1>JobOffersActivity.java</h1><pre class="source lang-java linenums">package edu.gatech.seclass.jobcompare6300.ui;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import edu.gatech.seclass.jobcompare6300.ApplicationController;
+import edu.gatech.seclass.jobcompare6300.R;
+import edu.gatech.seclass.jobcompare6300.db.JobEntity;
+
+<span class="fc" id="L23">public class JobOffersActivity extends AppCompatActivity {</span>
+<span class="fc" id="L24">	private final ApplicationController instance = ApplicationController.getInstance();</span>
+<span class="fc" id="L25">	private final List&lt;JobEntity&gt; selectedJobs = new ArrayList&lt;&gt;();</span>
+	private MenuItem compareItem;
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+<span class="fc" id="L31">		super.onCreate(savedInstanceState);</span>
+<span class="fc" id="L32">		setContentView(R.layout.activity_job_offers);</span>
+<span class="fc" id="L33">		String actionBarTitle = getIntent().getStringExtra(MainActivity.INTENT_ACTION_BAR_TITLE);</span>
+<span class="pc bpc" id="L34" title="1 of 4 branches missed.">		if (actionBarTitle == null || actionBarTitle.isEmpty()) {</span>
+<span class="fc" id="L35">			actionBarTitle = getString(R.string.app_name);</span>
+		}
+<span class="fc" id="L37">		Objects.requireNonNull(getSupportActionBar()).setTitle(actionBarTitle);</span>
+<span class="fc" id="L38">		RecyclerView rvJobOffers = findViewById(R.id.rvJobOffers);</span>
+		// we are initializing our adapter class and passing our job list to it.
+<span class="fc" id="L40">		List&lt;JobEntity&gt; jobs = instance.sortJobsByScore();</span>
+<span class="fc" id="L41">		JobOffersAdapter jobOffersAdapter = new JobOffersAdapter(this, jobs, new JobOffersAdapter.OnItemCheckListener() {</span>
+			@Override public void onItemCheck(JobEntity item) {
+<span class="fc" id="L43">				selectedJobs.add(item);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">				toggleCompareMenuItem(selectedJobs.size() == 2);</span>
+<span class="fc" id="L45">			}</span>
+
+
+			@Override public void onItemUncheck(JobEntity item) {
+<span class="fc" id="L49">				selectedJobs.remove(item);</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">				toggleCompareMenuItem(selectedJobs.size() == 2);</span>
+<span class="fc" id="L51">			}</span>
+
+
+			@Override public void onItemSelected(JobEntity item) {
+<span class="fc" id="L55">				Intent jobOfferIntent = new Intent(JobOffersActivity.this, JobActivity.class);</span>
+<span class="fc" id="L56">				jobOfferIntent.putExtra(JobActivity.INTENT_IS_CURRENT_JOB, false);</span>
+<span class="fc" id="L57">				jobOfferIntent.putExtra(MainActivity.INTENT_ACTION_BAR_TITLE, &quot;Job Offer Details&quot;);</span>
+<span class="fc" id="L58">				jobOfferIntent.putExtra(JobActivity.INTENT_JOB_ID, item.getId());</span>
+<span class="fc" id="L59">				startActivity(jobOfferIntent);</span>
+<span class="fc" id="L60">			}</span>
+		});
+<span class="fc" id="L62">		LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);</span>
+<span class="fc" id="L63">		rvJobOffers.setLayoutManager(linearLayoutManager);</span>
+<span class="fc" id="L64">		rvJobOffers.setAdapter(jobOffersAdapter);</span>
+<span class="fc" id="L65">	}</span>
+
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+<span class="fc" id="L70">		getMenuInflater().inflate(R.menu.job_offer_menu, menu);</span>
+<span class="fc" id="L71">		return true;</span>
+	}
+
+
+	@Override public boolean onPrepareOptionsMenu(Menu menu) {
+<span class="fc" id="L76">		compareItem = menu.findItem(R.id.action_compare);</span>
+<span class="fc" id="L77">		toggleCompareMenuItem(false);</span>
+<span class="fc" id="L78">		return super.onPrepareOptionsMenu(menu);</span>
+	}
+
+
+	private void toggleCompareMenuItem(boolean enable) {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		if (enable) {</span>
+<span class="fc" id="L84">			compareItem.setEnabled(true);</span>
+<span class="fc" id="L85">			compareItem.getIcon().setAlpha(255);</span>
+		}
+		else {
+			// disabled
+<span class="fc" id="L89">			compareItem.setEnabled(false);</span>
+<span class="fc" id="L90">			compareItem.getIcon().setAlpha(130);</span>
+		}
+<span class="fc" id="L92">	}</span>
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">		if (item.getItemId() == R.id.action_compare) {</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">			if (selectedJobs.size() == 2) {</span>
+<span class="fc" id="L99">				Intent intent = new Intent(this, JobCompareActivity.class);</span>
+<span class="fc" id="L100">				intent.putExtra(JobCompareActivity.INTENT_JOB1_ID, this.selectedJobs.get(0).getId());</span>
+<span class="fc" id="L101">				intent.putExtra(JobCompareActivity.INTENT_JOB2_ID, this.selectedJobs.get(1).getId());</span>
+<span class="fc" id="L102">				startActivity(intent);</span>
+<span class="fc" id="L103">			}</span>
+			else {
+<span class="nc" id="L105">				Toast.makeText(this,</span>
+<span class="nc" id="L106">						&quot;Please select only 2 jobs for comparison.&quot;, Toast.LENGTH_LONG).show();</span>
+			}
+		}
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">		if (item.getItemId() == R.id.action_cancel) {</span>
+<span class="nc" id="L110">			Intent intent = new Intent(this, MainActivity.class);</span>
+<span class="nc" id="L111">			startActivity(intent);</span>
+		}
+<span class="fc" id="L113">		return (super.onOptionsItemSelected(item));</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Generated by the Android Gradle plugin 7.3.1</div></body></html>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JobActivity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">edu.gatech.seclass.jobcompare6300.ui</a> &gt; <span class="el_source">JobActivity.java</span></div><h1>JobActivity.java</h1><pre class="source lang-java linenums">package edu.gatech.seclass.jobcompare6300.ui;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import edu.gatech.seclass.jobcompare6300.ApplicationController;
+import edu.gatech.seclass.jobcompare6300.R;
+import edu.gatech.seclass.jobcompare6300.db.JobEntity;
+
+<span class="fc" id="L21">public class JobActivity extends AppCompatActivity {</span>
+	public static final String INTENT_IS_CURRENT_JOB = &quot;isCurrentJob&quot;;
+	public static final String INTENT_JOB_ID = &quot;jobId&quot;;
+<span class="fc" id="L24">	private final org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());</span>
+<span class="fc" id="L25">	private final ApplicationController instance = ApplicationController.getInstance();</span>
+	private EditText etTitle, etCompany, etLocation, etCostIndex, etYearlySalary,
+			etYearlyBonus, etRsua, etRelocStipend, etPcholidays;
+	private boolean isCurrentJob;
+	private int jobId;
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+<span class="fc" id="L34">		super.onCreate(savedInstanceState);</span>
+<span class="fc" id="L35">		setContentView(R.layout.activity_job);</span>
+<span class="fc" id="L36">		Intent intent = getIntent();</span>
+<span class="fc" id="L37">		isCurrentJob = intent.getBooleanExtra(INTENT_IS_CURRENT_JOB, false);</span>
+<span class="fc" id="L38">		jobId = intent.getIntExtra(INTENT_JOB_ID, -1);</span>
+<span class="fc" id="L39">		String actionBarTitle = intent.getStringExtra(MainActivity.INTENT_ACTION_BAR_TITLE);</span>
+<span class="pc bpc" id="L40" title="1 of 4 branches missed.">		if (actionBarTitle == null || actionBarTitle.isEmpty()) {</span>
+<span class="fc" id="L41">			actionBarTitle = getString(R.string.app_name);</span>
+		}
+<span class="fc" id="L43">		Objects.requireNonNull(getSupportActionBar()).setTitle(actionBarTitle);</span>
+<span class="fc" id="L44">		etTitle = (EditText) findViewById(R.id.etTitle);</span>
+<span class="fc" id="L45">		etCompany = (EditText) findViewById(R.id.etCompany);</span>
+<span class="fc" id="L46">		etLocation = (EditText) findViewById(R.id.etLocation);</span>
+<span class="fc" id="L47">		etCostIndex = (EditText) findViewById(R.id.etCostIndex);</span>
+<span class="fc" id="L48">		etYearlySalary = (EditText) findViewById(R.id.etYearlySalary);</span>
+<span class="fc" id="L49">		etYearlyBonus = (EditText) findViewById(R.id.etYearlyBonus);</span>
+<span class="fc" id="L50">		etRsua = (EditText) findViewById(R.id.etRsua);</span>
+<span class="fc" id="L51">		etRelocStipend = (EditText) findViewById(R.id.etRelocStipend);</span>
+<span class="fc" id="L52">		etPcholidays = (EditText) findViewById(R.id.etPcHolidays);</span>
+<span class="fc" id="L53">		JobEntity jobEntity = instance.getJobById(jobId);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">		if (null != jobEntity) {</span>
+<span class="fc" id="L55">			updateJob(jobEntity);</span>
+		}
+<span class="fc" id="L57">	}</span>
+
+
+	private void updateJob(JobEntity currentJob) {
+<span class="fc" id="L61">		etTitle.setText(currentJob.getTitle());</span>
+<span class="fc" id="L62">		etCompany.setText(currentJob.getCompany());</span>
+<span class="fc" id="L63">		etLocation.setText(currentJob.getLocation());</span>
+<span class="fc" id="L64">		etCostIndex.setText(String.format(java.util.Locale.US, &quot;%d&quot;, currentJob.getCostIndex()));</span>
+<span class="fc" id="L65">		etYearlySalary.setText(String.format(java.util.Locale.US, &quot;%.2f&quot;, currentJob.getYearlySalary()));</span>
+<span class="fc" id="L66">		etYearlyBonus.setText(String.format(java.util.Locale.US, &quot;%.2f&quot;, currentJob.getYearlyBonus()));</span>
+<span class="fc" id="L67">		etRsua.setText(String.format(java.util.Locale.US, &quot;%.2f&quot;, currentJob.getRsua()));</span>
+<span class="fc" id="L68">		etRelocStipend.setText(String.format(java.util.Locale.US, &quot;%.2f&quot;, currentJob.getRelocStipend()));</span>
+<span class="fc" id="L69">		etPcholidays.setText(String.format(java.util.Locale.US, &quot;%d&quot;, currentJob.getPcHolidays()));</span>
+<span class="fc" id="L70">	}</span>
+
+
+	private boolean validInputs() {
+<span class="fc" id="L74">		boolean valid = true;</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">		if (TextUtils.isEmpty(etTitle.getText().toString())) {</span>
+<span class="fc" id="L76">			etTitle.setError(&quot;Job title cannot be empty&quot;);</span>
+<span class="fc" id="L77">			valid = false;</span>
+		}
+<span class="fc bfc" id="L79" title="All 2 branches covered.">		if (TextUtils.isEmpty(etCompany.getText().toString())) {</span>
+<span class="fc" id="L80">			etCompany.setError(&quot;Company name cannot be empty&quot;);</span>
+<span class="fc" id="L81">			valid = false;</span>
+		}
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		if (TextUtils.isEmpty(etLocation.getText().toString())) {</span>
+<span class="fc" id="L84">			etLocation.setError(&quot;Location cannot be empty&quot;);</span>
+<span class="fc" id="L85">			valid = false;</span>
+		}
+<span class="fc bfc" id="L87" title="All 2 branches covered.">		if (TextUtils.isEmpty(etCostIndex.getText().toString())) {</span>
+<span class="fc" id="L88">			etCostIndex.setError(&quot;Cost index cannot be empty&quot;);</span>
+<span class="fc" id="L89">			valid = false;</span>
+		}
+<span class="fc bfc" id="L91" title="All 2 branches covered.">		if (TextUtils.isEmpty(etYearlySalary.getText().toString())) {</span>
+<span class="fc" id="L92">			etYearlySalary.setError(&quot;Yearly salary cannot be empty&quot;);</span>
+<span class="fc" id="L93">			valid = false;</span>
+		}
+<span class="fc bfc" id="L95" title="All 2 branches covered.">		if (TextUtils.isEmpty(etYearlyBonus.getText().toString())) {</span>
+<span class="fc" id="L96">			etYearlyBonus.setError(&quot;Yearly bonus cannot be empty&quot;);</span>
+<span class="fc" id="L97">			valid = false;</span>
+		}
+<span class="fc bfc" id="L99" title="All 2 branches covered.">		if (TextUtils.isEmpty(etRsua.getText().toString())) {</span>
+<span class="fc" id="L100">			etRsua.setError(&quot;Restricted Stock Unit Award cannot be empty&quot;);</span>
+<span class="fc" id="L101">			valid = false;</span>
+		}
+<span class="fc bfc" id="L103" title="All 2 branches covered.">		if (TextUtils.isEmpty(etRelocStipend.getText().toString())) {</span>
+<span class="fc" id="L104">			etRelocStipend.setError(&quot;Relocation stipend cannot be empty&quot;);</span>
+<span class="fc" id="L105">			valid = false;</span>
+		}
+		else {
+<span class="fc" id="L108">			float relocStipend = Float.parseFloat(etRelocStipend.getText().toString());</span>
+<span class="pc bpc" id="L109" title="2 of 4 branches missed.">			if (relocStipend &lt; 0 || relocStipend &gt; 25000) {</span>
+<span class="nc" id="L110">				etRelocStipend.setError(&quot;Relocation stipend cannot be less than 0$ or greater than 25000$&quot;);</span>
+<span class="nc" id="L111">				valid = false;</span>
+			}
+		}
+<span class="fc bfc" id="L114" title="All 2 branches covered.">		if (TextUtils.isEmpty(etPcholidays.getText().toString())) {</span>
+<span class="fc" id="L115">			etPcholidays.setError(&quot;Personal Choice Holidays cannot be empty&quot;);</span>
+<span class="fc" id="L116">			valid = false;</span>
+		}
+		else {
+<span class="fc" id="L119">			float pcHolidays = Integer.parseInt(etPcholidays.getText().toString());</span>
+<span class="pc bpc" id="L120" title="2 of 4 branches missed.">			if (pcHolidays &lt; 0 || pcHolidays &gt; 20) {</span>
+<span class="nc" id="L121">				etPcholidays.setError(&quot;Personal Choice Holidays cannot be less than 0 or greater than 20&quot;);</span>
+<span class="nc" id="L122">				valid = false;</span>
+			}
+		}
+<span class="fc" id="L125">		return valid;</span>
+	}
+
+
+	private JobEntity buildJob() {
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">		JobEntity jobEntity = (jobId == -1) ? new JobEntity() : instance.getJobById(jobId);</span>
+<span class="fc" id="L131">		jobEntity.setTitle(etTitle.getText().toString());</span>
+<span class="fc" id="L132">		jobEntity.setCompany(etCompany.getText().toString());</span>
+<span class="fc" id="L133">		jobEntity.setLocation(etLocation.getText().toString());</span>
+<span class="fc" id="L134">		jobEntity.setCostIndex(Integer.parseInt(etCostIndex.getText().toString()));</span>
+<span class="fc" id="L135">		jobEntity.setYearlySalary(Float.parseFloat(etYearlySalary.getText().toString()));</span>
+<span class="fc" id="L136">		jobEntity.setYearlyBonus(Float.parseFloat(etYearlyBonus.getText().toString()));</span>
+<span class="fc" id="L137">		jobEntity.setRsua(Float.parseFloat(etRsua.getText().toString()));</span>
+<span class="fc" id="L138">		jobEntity.setRelocStipend(Float.parseFloat(etRelocStipend.getText().toString()));</span>
+<span class="fc" id="L139">		jobEntity.setPcHolidays(Integer.parseInt(etPcholidays.getText().toString()));</span>
+<span class="fc" id="L140">		jobEntity.setCurrentJob(isCurrentJob);</span>
+<span class="fc" id="L141">		return jobEntity;</span>
+	}
+
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+<span class="fc" id="L147">		getMenuInflater().inflate(R.menu.save_cancel_menu, menu);</span>
+<span class="fc" id="L148">		return true;</span>
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+<span class="fc bfc" id="L154" title="All 2 branches covered.">		if (item.getItemId() == R.id.action_save) {</span>
+<span class="fc" id="L155">			JobEntity jobEntity = validateAndSaveJob();</span>
+<span class="fc bfc" id="L156" title="All 2 branches covered.">			if (jobEntity != null) {</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">				if (!isCurrentJob) {</span>
+					// for save from job offers screen
+<span class="fc" id="L159">					showAdditionalOptions(jobEntity);</span>
+				}
+				else {
+<span class="fc" id="L162">					Intent intent = new Intent(this, MainActivity.class);</span>
+<span class="fc" id="L163">					startActivity(intent);</span>
+				}
+			}
+		}
+<span class="fc bfc" id="L167" title="All 2 branches covered.">		if (item.getItemId() == R.id.action_cancel) {</span>
+<span class="fc" id="L168">			Intent intent = new Intent(this, MainActivity.class);</span>
+<span class="fc" id="L169">			startActivity(intent);</span>
+		}
+<span class="fc" id="L171">		return (super.onOptionsItemSelected(item));</span>
+	}
+
+
+	private void showAdditionalOptions(JobEntity jobEntity) {
+<span class="fc" id="L176">		AlertDialog alertDialog = new AlertDialog.Builder(this).create();</span>
+<span class="fc" id="L177">		alertDialog.setTitle(&quot;Select Options&quot;);</span>
+<span class="fc" id="L178">		alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, &quot;Enter another offer&quot;, (dialog, id) -&gt; {</span>
+<span class="nc" id="L179">			finish();</span>
+<span class="nc" id="L180">			Intent jobOfferIntent = new Intent(this, JobActivity.class);</span>
+<span class="nc" id="L181">			jobOfferIntent.putExtra(JobActivity.INTENT_IS_CURRENT_JOB, false);</span>
+<span class="nc" id="L182">			jobOfferIntent.putExtra(MainActivity.INTENT_ACTION_BAR_TITLE, &quot;Job Offer Details&quot;);</span>
+<span class="nc" id="L183">			startActivity(jobOfferIntent);</span>
+<span class="nc" id="L184">		});</span>
+
+<span class="fc" id="L186">		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, &quot;Compare with current job&quot;, (dialog, id) -&gt; {</span>
+<span class="fc" id="L187">			Intent intent = new Intent(this, JobCompareActivity.class);</span>
+<span class="fc" id="L188">			JobEntity currentJob = instance.getCurrentJob();</span>
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">			if (null != currentJob) {</span>
+<span class="fc" id="L190">				intent.putExtra(JobCompareActivity.INTENT_JOB1_ID, currentJob.getId());</span>
+<span class="fc" id="L191">				intent.putExtra(JobCompareActivity.INTENT_JOB2_ID, jobEntity.getId());</span>
+<span class="fc" id="L192">				startActivity(intent);</span>
+			}
+			else {
+<span class="nc" id="L195">				Toast.makeText(this, &quot;Add current job first for comparison&quot;, Toast.LENGTH_LONG).show();</span>
+			}
+<span class="fc" id="L197">		});</span>
+
+<span class="fc" id="L199">		alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, &quot;Go to Main Menu&quot;, (dialog, id) -&gt; {</span>
+<span class="fc" id="L200">			Intent intent = new Intent(JobActivity.this, MainActivity.class);</span>
+<span class="fc" id="L201">			finish();</span>
+<span class="fc" id="L202">			startActivity(intent);</span>
+<span class="fc" id="L203">		});</span>
+<span class="fc" id="L204">		alertDialog.show();</span>
+<span class="fc" id="L205">	}</span>
+
+
+	private JobEntity validateAndSaveJob() {
+<span class="fc" id="L209">		boolean inputsValid = validInputs();</span>
+<span class="fc" id="L210">		logger.info(&quot;Inputs validated: &quot; + inputsValid);</span>
+<span class="fc" id="L211">		JobEntity jobEntity = null;</span>
+<span class="fc bfc" id="L212" title="All 2 branches covered.">		if (inputsValid) {</span>
+<span class="fc" id="L213">			jobEntity = buildJob();</span>
+<span class="pc bpc" id="L214" title="1 of 2 branches missed.">			if (jobId == -1) {</span>
+<span class="fc" id="L215">				logger.info(&quot;Creating a new job..&quot;);</span>
+<span class="fc" id="L216">				instance.addJob(jobEntity);</span>
+<span class="fc" id="L217">				Toast.makeText(this, &quot;Created a new job&quot;, Toast.LENGTH_LONG).show();</span>
+			}
+			else {
+<span class="nc" id="L220">				logger.info(&quot;Updating a existing job..&quot;);</span>
+<span class="nc" id="L221">				instance.updateJob(jobEntity);</span>
+<span class="nc" id="L222">				Toast.makeText(this, &quot;Updated the existing job&quot;, Toast.LENGTH_LONG).show();</span>
+			}
+		}
+<span class="fc" id="L225">		return jobEntity;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Generated by the Android Gradle plugin 7.3.1</div></body></html>

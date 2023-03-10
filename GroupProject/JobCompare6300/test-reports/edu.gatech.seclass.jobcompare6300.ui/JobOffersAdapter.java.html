@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JobOffersAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">edu.gatech.seclass.jobcompare6300.ui</a> &gt; <span class="el_source">JobOffersAdapter.java</span></div><h1>JobOffersAdapter.java</h1><pre class="source lang-java linenums">package edu.gatech.seclass.jobcompare6300.ui;
+
+/**
+ * Created by Puneeth Reddy on 2/27/2023.
+ Initial version
+ */
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.android.material.card.MaterialCardView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import edu.gatech.seclass.jobcompare6300.R;
+import edu.gatech.seclass.jobcompare6300.db.JobEntity;
+
+public class JobOffersAdapter extends RecyclerView.Adapter&lt;JobOffersAdapter.ViewHolder&gt; {
+
+	private final Context context;
+	private final List&lt;JobEntity&gt; jobEntities;
+	private final OnItemCheckListener itemCheckListener;
+
+	interface OnItemCheckListener {
+		void onItemCheck(JobEntity item);
+
+		void onItemUncheck(JobEntity item);
+
+		void onItemSelected(JobEntity item);
+	}
+
+
+	// Constructor
+<span class="fc" id="L41">	public JobOffersAdapter(Context context, List&lt;JobEntity&gt; jobEntities, OnItemCheckListener itemCheckListener) {</span>
+<span class="fc" id="L42">		this.context = context;</span>
+<span class="fc" id="L43">		this.jobEntities = jobEntities;</span>
+<span class="fc" id="L44">		this.itemCheckListener = itemCheckListener;</span>
+<span class="fc" id="L45">	}</span>
+
+
+	@NonNull
+	@Override
+	public JobOffersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		// to inflate the layout for each item of recycler view.
+<span class="fc" id="L52">		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_job_offers_card, parent, false);</span>
+<span class="fc" id="L53">		return new JobOffersAdapter.ViewHolder(view);</span>
+	}
+
+
+	@Override public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+<span class="fc" id="L58">		JobEntity jobEntity = jobEntities.get(position);</span>
+<span class="fc" id="L59">		holder.tvTitle.setText(jobEntity.getTitle());</span>
+<span class="fc" id="L60">		holder.tvCompany.setText(jobEntity.getCompany());</span>
+<span class="fc" id="L61">		String jobScore = &quot;Score: &quot; + String.format(java.util.Locale.US, &quot;%.1f&quot;, jobEntity.getJobScore());</span>
+<span class="fc" id="L62">		holder.tvJobScore.setText(jobScore);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">		holder.ivJobType.setImageResource(jobEntity.isCurrentJob() ? android.R.drawable.btn_star_big_on :</span>
+<span class="fc" id="L64">				android.R.drawable.btn_star_big_off);</span>
+<span class="fc" id="L65">		holder.cvJobCard.setOnClickListener(v -&gt; this.itemCheckListener.onItemSelected(jobEntity));</span>
+<span class="fc" id="L66">		holder.cvJobCard.setOnLongClickListener(v -&gt; {</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">			holder.cvJobCard.setChecked(!holder.cvJobCard.isChecked());</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">			if (holder.cvJobCard.isChecked()) {</span>
+<span class="fc" id="L69">				this.itemCheckListener.onItemCheck(jobEntity);</span>
+			}
+			else {
+<span class="fc" id="L72">				this.itemCheckListener.onItemUncheck(jobEntity);</span>
+			}
+<span class="fc" id="L74">			return true;</span>
+		});
+<span class="fc" id="L76">	}</span>
+
+
+	@Override
+	public int getItemCount() {
+<span class="fc" id="L81">		return jobEntities.size();</span>
+	}
+
+
+	// View holder class for initializing of your views such as TextView and Imageview
+	public static class ViewHolder extends RecyclerView.ViewHolder {
+		private final MaterialCardView cvJobCard;
+		private final ImageView ivJobType;
+		private final TextView tvTitle;
+		private final TextView tvCompany;
+		private final TextView tvJobScore;
+
+
+		public ViewHolder(@NonNull View itemView) {
+<span class="fc" id="L95">			super(itemView);</span>
+<span class="fc" id="L96">			cvJobCard = itemView.findViewById(R.id.cvJobCard);</span>
+<span class="fc" id="L97">			ivJobType = itemView.findViewById(R.id.ivJobType);</span>
+<span class="fc" id="L98">			tvTitle = itemView.findViewById(R.id.tvTitle);</span>
+<span class="fc" id="L99">			tvCompany = itemView.findViewById(R.id.tvCompany);</span>
+<span class="fc" id="L100">			tvJobScore = itemView.findViewById(R.id.tvJobScore);</span>
+<span class="fc" id="L101">		}</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Generated by the Android Gradle plugin 7.3.1</div></body></html>
